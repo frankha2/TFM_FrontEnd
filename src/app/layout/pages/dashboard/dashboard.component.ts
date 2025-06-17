@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  imports: [CardModule]
 })
 export class DashboardComponent implements OnInit {
 

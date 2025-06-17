@@ -10,13 +10,12 @@ export const routes: Routes = [
                 loadChildren: () => import('./auth/auth.routes').then(m => m.authRoutes)
             },
             {
-                path: '',
+                path: 'smartcity',
                 loadChildren: () => import('../app/layout/layout.routes').then(m => m.layoutRoutes)
             },
             {
                 path: '**',
                 redirectTo: 'auth'
-                // loadComponent: () => import('./home/home.component').then(m => m.HomeComponent)
             }
         ]
     }

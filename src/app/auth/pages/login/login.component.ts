@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/smartcity']);
     if (this.form.valid) {
       console.log(this.form.value);
     }
