@@ -6,7 +6,7 @@ import { MapComponent } from '../../../shared/components/map/map.component';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-  imports: [CardModule, MapComponent]
+  imports: [CardModule, MapComponent, CardModule]
 })
 export class DashboardComponent implements OnInit {
 
