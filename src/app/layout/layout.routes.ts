@@ -1,5 +1,6 @@
 import { Routes } from "@angular/router";
 import { HomePageComponent } from "./pages/home-page/home-page.component";
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 
 export const layoutRoutes: Routes = [
     {
@@ -8,7 +9,11 @@ export const layoutRoutes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                loadComponent: () => import('./pages/dashboard/dashboard.component').then(m => m.DashboardComponent)
+                component: DashboardComponent
+            },
+            {
+                path: 'containers',
+                loadChildren: () => import('../garbage-containers/garbage-containers.routes').then(m => m.GarbageContainersRoutes)
             },
             {
                 path: '',
