@@ -3,24 +3,36 @@ import { ContainersResponse } from "../interfaces/containers-response.interface"
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 
-export class ContainersService {
+export class ContainersService  {
 
     public containers: ContainersResponse[] = [
         {
             id: "uuid-del-contenedor-123",
             location: { latitude: 40.4167, longitude: -3.70325 },
+            status: "hight",
+            last_updated: "2022-02-27"
+        },
+        {
+            id: "oi-del-contenedor-123",
+            location: { latitude: 40.4167, longitude: -3.70325 },
             status: "medium",
-            last_updated: "2023-10-27T10:00:00Z"
-        }  
+            last_updated: "2023-03-27"
+        },
+        {
+            id: "ed-del-contenedor-123",
+            location: { latitude: 40.4167, longitude: -3.70325 },
+            status: "slow",
+            last_updated: "2024-10-27"
+        } 
     ];
 
-    private _http = inject(HttpClient);
+    // private _http = inject(HttpClient);
     
     getAll() {
-        // return this.containers;
-        return this._http.get<ContainersResponse[]>(``)
+        return this.containers;
+        // return this._http.get<ContainersResponse[]>(``)
     }
 }
