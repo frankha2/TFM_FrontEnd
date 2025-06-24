@@ -6,11 +6,11 @@ import { ContainersResponse } from "../../interfaces/containers-response.interfa
 import { ContainersService } from "../../services/containers.service";
 import { CardModule } from "primeng/card";
 import { DatePipe } from "@angular/common";
-import { IconFieldModule } from "primeng/iconfield";
-import { InputIconModule } from "primeng/inputicon";
+import { InputIcon } from 'primeng/inputicon';
+import { IconField } from 'primeng/iconfield';
 
 @Component({
-    imports: [ ButtonModule, InputTextModule, TableModule, CardModule, DatePipe, IconFieldModule, InputIconModule ],
+    imports: [ ButtonModule, InputTextModule, TableModule, CardModule, DatePipe, IconField, InputIcon ],
     selector: 'app-containers-list',
     templateUrl: './containers-list.component.html',
     styleUrl: './containers-list.component.scss'
@@ -21,16 +21,15 @@ export class ContainersListPageComponent implements OnInit {
     public containers_response: ContainersResponse[] = [];
 
     public containersService = inject(ContainersService);
-
     
     public get response() : ContainersResponse[] {
         return this.containers_response || [];
     }
     
-
     ngOnInit(): void {
         const response = this.containersService.getAll()
 
         this.containers_response = response;
     }
+    
 }
