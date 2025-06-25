@@ -1,0 +1,32 @@
+
+<div class="flex flex-column m-4 gap-4">
+
+    <p-card class="flex flex-column gap-4">
+        <header class="mb-7">
+            <h3 class="text-lg font-semibold">Filtros</h3>
+            <p class="text-sm text-gray-600">Ingrese los parámetros para calcular la ruta óptima de recolección de residuos.</p>
+        </header>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="flex flex-column items-center gap-4 mb-4">
+                <label for="lat" class="font-semibold w-24">Latitud</label>
+                <input pInputText id="lat" class="flex-auto" autocomplete="off" formControlName="latitude"/>
+            </div>
+            <div class="flex flex-column items-center gap-4 mb-4">
+                <label for="long" class="font-semibold w-24">Longitud</label>
+                <input pInputText id="long" class="flex-auto" autocomplete="off" formControlName="longitude"/>
+            </div>
+            <div class="flex flex-column items-center gap-4 mb-4">
+                <label for="waste" class="font-semibold w-24">Tipo Residuo</label>
+                <input pInputText id="waste" class="flex-auto" autocomplete="off"/>
+            </div>
+            <div class="flex flex-column items-center gap-4 mb-4">
+                <label for="lev" class="font-semibold w-24">Nivel Llenado</label>
+                <input pInputText id="lev" class="flex-auto" autocomplete="off" formControlName="status"/>
+            </div>
+            
+            <div class="flex justify-end gap-2">
+                <p-button type="submit" label="Generar Ruta Óptima" [disabled]="!formGroup.valid" />
+            </div>
+        </form>
+    </p-card>
+</div>

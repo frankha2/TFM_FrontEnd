@@ -1,0 +1,29 @@
+<div class="container" style="overflow-y: auto;">
+    <div class="flex flex-column justify-content-center align-items-center">
+        <div class="flex flex-row justify-content-center align-items-center gap-8">
+            <h1>Ruta Obtimizada</h1>
+            <p-button (click)="recalculateRoute()" severity="secondary">
+                <i class="pi pi-refresh"></i>
+                <span class="ml-2">Recalcular Ruta</span>
+            </p-button>
+        </div>
+        <p-card class="container-map">
+            <app-map></app-map>
+        </p-card>
+        <div>
+            <h1>Metricas de ruta</h1>
+        </div>
+        <div class="flex flex-row gap-2">
+            <p-card header="Distancia total" [style]="{ width: '25rem' }">
+                <p class="m-0">
+                    15.8 km
+                </p>
+            </p-card>
+            <p-card header="Estimación de tiempo" [style]="{ width: '25rem' }">
+                <p class="m-0">
+                    2 Horas 30 Minutos
+                </p>
+            </p-card>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,12 @@
-<div class="flex flex-row justify-content-between align-items-between gap-4 mx-4">
+<div class="flex flex-row justify-content-between align-items-between topbar gap-4 mx-4">
     <div class="w-5">
         <h1>Smart City</h1>
     </div>
-    <ul class="menu-list flex flex-row justify-content-center align-items-center gap-1">
-         <li class="text-2xl"><a routerLink="/">Dashboard</a></li>   
-         <li class="text-2xl"><a routerLink="/">Routes</a></li>
-         <li class="text-2xl"><a routerLink="/">Containers</a></li>
-         <li class="text-2xl"><a routerLink="/">Reports</a></li>
+    <ul class="menu-list">
+         <li routerLink="/smartcity/dashboard" class="text-2xl"><a >Dashboard</a></li>   
+         <li routerLink="/smartcity/containers/optimized-routes" class="text-2xl"><a >Rutas</a></li>
+         <li routerLink="/smartcity/containers/manage" class="text-2xl"><a >Contenedores</a></li>
+         <li routerLink="/smartcity/containers/generate-route" class="text-2xl"><a >Reportes</a></li>
          <li>
             <p-button icon="pi pi-bell">
                 
@@ -15,17 +15,25 @@
         <li>
             <p-button 
                 class=""
-                styleClass=". m-0 p-1" 
+                styleClass="m-0 p-1" 
                 [outlined]="true" 
                 [rounded]="true"
                 variant="text"
+                (click)="porfile()"
             > 
                 <img 
-                    src="assets/icons/user-m.png" 
+                    src="../../../../../public/assets/icons/user-m.png" 
                     alt="User-Avatar" 
-                    style="padding: 0; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; object-fit: contain; box-shadow: none;"
+                    style="padding: 0; width: 40px; height: 40px; border-radius: 50%; ;"
                 >
             </p-button>
+
+            <p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '15rem' }">
+                <div class="flex flex-column justify-end gap-4">
+                    <p-button label="Perfil" severity="secondary" (click)="visible = false" />
+                    <p-button label="Salir" (click)="logOut()" />
+                </div>
+            </p-dialog>
         </li>
     </ul>
 </div>
