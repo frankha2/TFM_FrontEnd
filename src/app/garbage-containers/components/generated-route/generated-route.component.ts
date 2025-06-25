@@ -1,5 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { MapComponent } from "../../../shared/components/map/map.component";
+import { FormGroup } from "@angular/forms";
+import { RoutesService } from "../../services/routes.service";
+import { FilterRoute } from "../../interfaces/filter-route.interface";
 
 @Component({
     imports: [MapComponent],
@@ -9,12 +12,11 @@ import { MapComponent } from "../../../shared/components/map/map.component";
 })
 
 export class GeneratedRouteComponent {
-    // This component is used to display the generated route page.
-    // It can be extended in the future to include more functionality.
     
-    constructor() {
-        // Initialization logic can go here if needed.
-    }
 
-    // Placeholder for future methods or properties related to the generated route page.
+    private routesGenerated = inject(RoutesService)
+
+    getOptimizedRoute(filters: FilterRoute) {
+        this.routesGenerated.calculateRoute(filters)
+    }
 }

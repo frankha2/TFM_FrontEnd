@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from "@angular/core";
 import { ButtonModule } from "primeng/button";
 import { InputTextModule } from "primeng/inputtext";
 import { TableModule } from "primeng/table";
-import { ContainersResponse } from "../../interfaces/containers-response.interface";
 import { ContainersService } from "../../services/containers.service";
 import { CardModule } from "primeng/card";
 import { CommonModule, DatePipe } from "@angular/common";
@@ -10,6 +9,8 @@ import { InputIcon } from 'primeng/inputicon';
 import { IconField } from 'primeng/iconfield';
 import { DialogModule } from "primeng/dialog";
 import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { ContainerRequest } from "../../interfaces/containers-response.interface";
+import { ContainerCreated } from "../../interfaces/container-created.interface";
 
 @Component({
     imports: [ 
@@ -31,17 +32,17 @@ import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@
 
 export class ContainersListPageComponent implements OnInit {
 
-    public visible: boolean = false;
+    public visibleCreated: boolean = false;
 
     private fb = inject(FormBuilder);
 
     formGroup!: FormGroup;
 
-    public containers_response: ContainersResponse[] = [];
+    public containers_response: ContainerRequest[] = [];
 
     public containersService = inject(ContainersService);
     
-    public get response() : ContainersResponse[] {
+    public get response() : ContainerRequest[] {
         return this.containers_response || [];
     }
     
@@ -56,27 +57,31 @@ export class ContainersListPageComponent implements OnInit {
         this.formGroup = this.fb.group({
             latitude: ['', [Validators.required]],
             longitude: ['', [Validators.required]],
+            capacity_liters: ['', [Validators.required]]
         });
     }
 
     openCreateContainerDialog() {
-        this.visible = true;
+        this.visibleCreated = true;
     }
 
     // Este método se ejecuta cuando se envía el formulario y envia la petición para guardar el nuevo contenedor.
     onSubmit() {
-        this.visible = false;
-        const { latitude, longitude } = this.formGroup.value;
+        this.visibleCreated = false;
+        const { latitude, longitude, capacity_liters } = this.formGroup.value;
 
+        const data: ContainerCreated = {latitude: latitude, longitude: longitude, capacity_liters: capacity_liters};
 
+        this.containersService.createContainer(data)
     }
 
-    openContainerDetailsDialog(container: ContainersResponse) {
-        this.visible = true;
-        this.formGroup.patchValue({
-            latitude: container.location.latitude,
-            longitude: container.location.longitude
-        });
+    // 
+    openContainerDetailsDialog(container: ContainerRequest) {
+        // this.visible = true;
+        // this.formGroup.patchValue({
+        //     latitude: container.location.latitude,
+        //     longitude: container.location.longitude
+        // });
     }
     
 }

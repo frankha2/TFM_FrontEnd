@@ -53,6 +53,7 @@
                             <th>Contenedor</th>
                             <th>Latitud</th>
                             <th>Longitud</th>
+                            <th>Capacidad</th>
                             <th>Estado de Llenado</th>
                             <th>Fecha de actualización</th>
                             <th>Acciones</th>
@@ -63,9 +64,10 @@
                             <td> {{ rowIndex + 1 }} </td>
                             <td> {{ container.location.latitude }} </td>
                             <td> {{ container.location.longitude }} </td>
+                            <td> {{ container.capacity_liters }} </td>
                             <td> 
                                 <p-button
-                                    [severity]="container.status === 'Lleno' ? 'danger' : container.status === 'Medio' ? 'warn' : 'success'"
+                                    [severity]="container.status === 'high' ? 'danger' : container.status === 'medium' ? 'warn' : 'success'"
                                     [label]="container.status"
                                    
                                     iconPos="left"
@@ -74,7 +76,7 @@
                                     [disabled]="true"
                                 >
                                     <i class="pi" 
-                                        [ngClass]="{'pi-ban': container.status === 'Lleno', 
+                                        [ngClass]="{'pi-ban': container.status === 'high', 
                                                     'pi-exclamation-triangle': container.status === 'Medio', 
                                                     'pi-check': container.status === 'Bajo'}">
                                     </i>
@@ -106,7 +108,7 @@
 
 </div>
 
-<p-dialog header="Crear Nuevo Contenedor" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+<p-dialog header="Crear Nuevo Contenedor" [modal]="true" [(visibleCreated)]="visibleCreated" [style]="{ width: '25rem' }">
     <span class="p-text-secondary block mb-8">Ingrese la información del contenedor.</span>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
         <div class="flex items-center gap-4 mb-4">
@@ -118,7 +120,7 @@
             <input pInputText id="email" class="flex-auto" autocomplete="off" formControlName="longitude" required/>
         </div>
         <div class="flex justify-end gap-2">
-            <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+            <p-button label="Cancelar" severity="secondary" (click)="visibleCreated = false" />
             <p-button type="submit" label="Guardar" [disabled]="!formGroup.valid" />
         </div>
     </form>

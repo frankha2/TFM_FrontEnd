@@ -1,6 +1,8 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { GeneratedRouteComponent } from "../../components/generated-route/generated-route.component";
 import { FilterRouteComponent } from "../../components/filter-route/filter-route.component";
+import { FormGroup } from "@angular/forms";
+import { FilterRoute } from "../../interfaces/filter-route.interface";
 
 @Component({
     selector: 'app-search-route-page',
@@ -10,12 +12,10 @@ import { FilterRouteComponent } from "../../components/filter-route/filter-route
 })
 
 export class SearchRoutePageComponent {
-    // This component is used to display the generated route page.
-    // It can be extended in the future to include more functionality.
     
-    constructor() {
-        // Initialization logic can go here if needed.
-    }
+    @ViewChild(GeneratedRouteComponent) search!: GeneratedRouteComponent;
 
-    // Placeholder for future methods or properties related to the generated route page.
+    setFilter(filter: FilterRoute) {
+        this.search.getOptimizedRoute(filter);
+    }
 }

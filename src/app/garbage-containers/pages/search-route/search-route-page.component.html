@@ -7,7 +7,7 @@
         </div>
 
         <div class="flex flex-row justify-content-center align-items-center mt-4">
-            <app-filter-route></app-filter-route>
+            <app-filter-route (filterApplied)="setFilter($event)"></app-filter-route>
             <app-generated-route></app-generated-route>
         </div>
     </div>

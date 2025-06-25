@@ -1,13 +1,15 @@
-export interface ContainersResponse {
-    id: string;
-    location: Locations;
-    status: string;
-    last_updated: string;
+export interface ContainerRequest {
+    id:              string;
+    location:        Location;
+    capacity_liters: number;
+    status:          string;
+    last_fill_level: number;
+    last_updated:    string;
+    created_at:      string;
+    updated_at:      string;
 }
 
-interface Locations {
-    latitude: number;
+export interface Location {
+    latitude:  number;
     longitude: number;
 }
-
-// Status: num

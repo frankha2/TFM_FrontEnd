@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, EventEmitter, inject, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { ButtonModule } from "primeng/button";
 import { CardModule } from "primeng/card";
 import { InputTextModule } from "primeng/inputtext";
+import { FilterRoute } from "../../interfaces/filter-route.interface";
 
 @Component({
     imports: [CardModule, ReactiveFormsModule, ButtonModule, InputTextModule],
@@ -12,6 +13,8 @@ import { InputTextModule } from "primeng/inputtext";
 })
 
 export class FilterRouteComponent implements OnInit {
+
+    @Output() filterApplied = new EventEmitter<FilterRoute>();
 
     private fb: FormBuilder = inject(FormBuilder);
 
@@ -30,12 +33,11 @@ export class FilterRouteComponent implements OnInit {
     }
 
     onSubmit() {
-        if (this.formGroup.valid) {
-            const formData = this.formGroup.value;
-            console.log('Form Data:', formData);
-            // Here you can handle the form submission, e.g., filter routes based on the form data.
-        } else {
-            console.error('Form is invalid');
-        }
+        this.filterApplied.emit(
+        {
+            latitude: this.formGroup.value.latitude, 
+            longitude: this.formGroup.value.longitude, 
+            status: this.formGroup.value.status
+        });
     }
 }
