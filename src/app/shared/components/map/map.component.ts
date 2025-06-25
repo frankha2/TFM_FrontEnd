@@ -31,8 +31,6 @@ export class MapComponent implements OnInit {
     this.initMap();
   }
  
- 
- 
   private initMap(): void {
     //configuración del mapa
     this.map = L.map('map', {

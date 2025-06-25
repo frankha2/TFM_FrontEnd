@@ -1,3 +1,15 @@
+.topbar {
+    width: 100%;
+}
+
+@media screen and (max-width : 668px) {
+    .topbar {
+        visibility: hidden;
+        width: 0px;
+    }
+    
+}
+
 ul {
     text-align: center;
     list-style: none;

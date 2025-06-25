@@ -12,19 +12,19 @@ export class ContainersService  {
         {
             id: "uuid-del-contenedor-123",
             location: { latitude: 40.4167, longitude: -3.70325 },
-            status: "hight",
+            status: "Lleno",
             last_updated: "2022-02-27"
         },
         {
             id: "oi-del-contenedor-123",
             location: { latitude: 40.4167, longitude: -3.70325 },
-            status: "medium",
+            status: "Medio",
             last_updated: "2023-03-27"
         },
         {
             id: "ed-del-contenedor-123",
             location: { latitude: 40.4167, longitude: -3.70325 },
-            status: "slow",
+            status: "Bajo",
             last_updated: "2024-10-27"
         } 
     ];

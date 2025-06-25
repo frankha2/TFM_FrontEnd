@@ -1,15 +1,28 @@
-import { Component } from "@angular/core";
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { Component, inject } from "@angular/core";
+import { Router, RouterLink, RouterOutlet } from "@angular/router";
 import { ButtonModule } from "primeng/button";
+import { Dialog } from "primeng/dialog";
 
 @Component({
     selector: 'app-topbar',
     templateUrl: './topbar.component.html',
     styleUrl: './topbar.component.scss',
-    imports: [ ButtonModule, RouterLink, RouterOutlet ]
+    imports: [ ButtonModule, RouterLink, RouterOutlet, Dialog ]
 })
 
 export class Topbarcomponent {
+    public visible: boolean = false;
 
+    private router = inject(Router);
+
+    porfile() {
+        this.visible = true;
+    }
+
+    logOut() {
+        this.visible = false;
+
+        this.router.navigate(['/auth']);
+    }
     
 }
