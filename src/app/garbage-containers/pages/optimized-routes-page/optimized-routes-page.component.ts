@@ -8,4 +8,7 @@ import { OptimizedRoutesComponent } from "../../components/optimized-routes/opti
     styleUrl: './optimized-routes-page.component.scss',
 })
 
-export class OptimizedRoutesComponentPage {}
+export class OptimizedRoutesComponentPage {
+
+    
+}

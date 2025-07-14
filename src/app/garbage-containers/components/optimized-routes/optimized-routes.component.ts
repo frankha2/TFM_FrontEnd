@@ -1,22 +1,32 @@
-import { Component, inject } from "@angular/core";
-import { MapComponent } from "../../../shared/components/map/map.component";
+import { Component, inject, OnInit } from "@angular/core";
+import { MapOptimizedRouteComponent } from "../../../shared/components/map-optimized-route/map-optimized-route.component";
 import { CardModule } from "primeng/card";
 import { ButtonModule } from "primeng/button";
-import { HttpClient } from "@angular/common/http";
-
+import { ContainersService } from "../../services/containers.service";
+import { ContainersResponse } from "../../interfaces/containers-response.interface";
 @Component({
-    imports: [ CardModule, MapComponent, ButtonModule ],
+    imports: [ CardModule, MapOptimizedRouteComponent, ButtonModule ],
     selector: 'app-optimized-routes-component',
     templateUrl: './optimized-routes.component.html',
     styleUrl: './optimized-routes.component.scss'
 })
 
-export class OptimizedRoutesComponent {
+export class OptimizedRoutesComponent implements OnInit {
 
-    // private http = inject(HttpClient); 
+    public containersList: ContainersResponse[] = [];
+
+    private http = inject(ContainersService); 
+
+    ngOnInit(): void {
+        const response = this.http.getAllContainers()
+        this.containersList = response;
+    }
 
     recalculateRoute() {
-        // this.http.get().subscribe({
+        
+        const response = this.http.getAllContainers()
+        this.containersList = response;
+        // .subscribe({
         //     next: (response) => {
         //         console.log('Route recalculated successfully:', response);
         //     }

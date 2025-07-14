@@ -1,4 +1,4 @@
-export interface ContainerRequest {
+export interface ContainersResponse {
     id:              string;
     location:        Location;
     capacity_liters: number;
