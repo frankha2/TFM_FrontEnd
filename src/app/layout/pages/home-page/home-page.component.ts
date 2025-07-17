@@ -7,6 +7,6 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  imports: [ RouterOutlet, Topbarcomponent, SidebarComponent ] 
+  imports: [ RouterOutlet, Topbarcomponent ] 
 })
 export class HomePageComponent {}

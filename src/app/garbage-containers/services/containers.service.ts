@@ -43,7 +43,7 @@ export class ContainersService  {
                 longitude: -3.684439
             },
             capacity_liters: 2400,
-            status: "low",
+            status: "high",
             last_fill_level: 17,
             last_updated: "2025-06-24T04:33:48.761448Z",
             created_at: "2025-06-24T03:48:11.07833Z",
