@@ -1,16 +1,15 @@
 import { inject, Injectable } from "@angular/core";
-import { ContainerRequest } from "../interfaces/containers-response.interface";
-import { HttpClient } from "@angular/common/http";
-import { FormGroup } from "@angular/forms";
+import { ContainersResponse } from "../interfaces/containers-response.interface";
 import { ContainerCreated } from "../interfaces/container-created.interface";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root',
 })
 
 export class ContainersService  {
-
-    public containers: ContainerRequest[] = [
+    
+    public containers: ContainersResponse[] = [
         {
             id: "c7a1c7d6-3d2c-4e8d-9a6a-0b1e4c7b8e1a",
             location: {
@@ -44,7 +43,7 @@ export class ContainersService  {
                 longitude: -3.684439
             },
             capacity_liters: 2400,
-            status: "low",
+            status: "high",
             last_fill_level: 17,
             last_updated: "2025-06-24T04:33:48.761448Z",
             created_at: "2025-06-24T03:48:11.07833Z",
@@ -53,10 +52,10 @@ export class ContainersService  {
     ];
 
     // private _http = inject(HttpClient);
-    
-    getAll() {
+
+    getAllContainers() {
         return this.containers;
-        // return this._http.get<ContainersResponse[]>(``)
+        // return this._http.get<ContainersResponse[]>(`http://192.168.13.102:8080/api/v1/containers`);
     }
 
     createContainer(newContainer: ContainerCreated) {

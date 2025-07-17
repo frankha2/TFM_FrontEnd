@@ -9,7 +9,7 @@ import { InputIcon } from 'primeng/inputicon';
 import { IconField } from 'primeng/iconfield';
 import { DialogModule } from "primeng/dialog";
 import { Form, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { ContainerRequest } from "../../interfaces/containers-response.interface";
+import { ContainersResponse } from "../../interfaces/containers-response.interface";
 import { ContainerCreated } from "../../interfaces/container-created.interface";
 
 @Component({
@@ -38,16 +38,16 @@ export class ContainersListPageComponent implements OnInit {
 
     formGroup!: FormGroup;
 
-    public containers_response: ContainerRequest[] = [];
+    public containers_response: ContainersResponse[] = [];
 
     public containersService = inject(ContainersService);
     
-    public get response() : ContainerRequest[] {
+    public get response() : ContainersResponse[] {
         return this.containers_response || [];
     }
     
     ngOnInit(): void {
-        const response = this.containersService.getAll()
+        const response = this.containersService.getAllContainers()
         this.initForm();
 
         this.containers_response = response;
@@ -76,7 +76,7 @@ export class ContainersListPageComponent implements OnInit {
     }
 
     // 
-    openContainerDetailsDialog(container: ContainerRequest) {
+    openContainerDetailsDialog(container: ContainersResponse) {
         // this.visible = true;
         // this.formGroup.patchValue({
         //     latitude: container.location.latitude,
