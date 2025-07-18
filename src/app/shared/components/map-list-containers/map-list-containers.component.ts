@@ -4,10 +4,12 @@ import 'leaflet-routing-machine';
 import { ContainersResponse } from "../../../garbage-containers/interfaces/containers-response.interface";
 import { DialogModule } from "primeng/dialog";
 import { ButtonModule } from "primeng/button";
-import { DatePipe } from "@angular/common";
+import { formatDate } from "@angular/common";
+import { InputTextModule } from "primeng/inputtext";
+import { PanelModule } from "primeng/panel";
 
 @Component({
-  imports: [ DialogModule, ButtonModule, DatePipe ],
+  imports: [ PanelModule, DialogModule, ButtonModule, InputTextModule ],
   selector: 'app-map-list-component',
   templateUrl: './map-list-containers.component.html',
   styleUrls: ['./map-list-containers.component.scss']
@@ -61,7 +63,8 @@ export class MapListContainersComponent implements OnInit, AfterViewInit {
       
       marker.on('click', () => {
         this.collectionPoint = i + 1;
-        this.containerSelected = resp;
+        const date = formatDate(resp.last_updated, "short", "en-US"); 
+        this.containerSelected = {...resp, last_updated: date };
         this.displayDialog = true;
       });
     

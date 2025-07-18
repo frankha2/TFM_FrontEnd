@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { Router, RouterLink, RouterOutlet } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { ButtonModule } from "primeng/button";
 import { Dialog } from "primeng/dialog";
 
@@ -7,7 +7,7 @@ import { Dialog } from "primeng/dialog";
     selector: 'app-topbar',
     templateUrl: './topbar.component.html',
     styleUrl: './topbar.component.scss',
-    imports: [ ButtonModule, RouterLink, RouterOutlet, Dialog ]
+    imports: [ ButtonModule, RouterLink, Dialog ]
 })
 
 export class Topbarcomponent {

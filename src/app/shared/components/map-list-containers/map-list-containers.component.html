@@ -1,4 +1,6 @@
-<div id="map"></div>
+<div class="flex justify-content-center align-items-center">
+    <div id="map"></div>
+</div>
 
 <p-dialog
     [header]="`Punto de recogida ${ collectionPoint }`"
@@ -7,32 +9,38 @@
     [(visible)]="displayDialog"
     [style]="{ width: '25rem' }"
 >
-    <span class="p-text-secondary block mb-8"> algo </span>
-    <div class="flex items-center gap-4 mb-4">
-        <label class="font-semibold w-24"> Contenedor: </label>
-        <span class="font-semibold w-24">  {{ containerSelected?.id }} </span>
-    </div>
-    <div class="flex items-center gap-4 mb-4">
-        <label class="font-semibold w-24"> Capacidad: </label>
-        <span class="font-semibold w-24"> L: {{ containerSelected?.capacity_liters }} </span>
+
+    <div class="flex flex-column gap-3 mt-4">
+
+        <div class="grid">
+            <label class="col-5 font-bold w-24"> Contenedor: </label>
+            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="collectionPoint"/>
+        </div>
+        <div class="grid">
+            <label class="col-5 font-bold w-24"> Capacidad: </label>
+            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="containerSelected?.capacity_liters"/>
+        </div>
+    
+        <div class="grid">
+            <label class="col-5 font-bold w-24"> Estado: </label>
+            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="containerSelected?.status"/>
+            
+        </div>
+    
+        <div class="grid">
+            <label class="col-5 font-bold w-24"> Ultimo nivel lleno: </label>
+            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="containerSelected?.last_fill_level"/>
+            
+        </div>
+    
+        <div class="grid">
+            <label class="col-5 font-bold w-24"> Actualizado: </label>
+            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="`${containerSelected?.last_updated}`"/>
+        </div>
+
     </div>
 
-    <div class="flex items-center gap-4 mb-4">
-        <label class="font-semibold w-24"> Estado: </label>
-        <span class="font-semibold w-24"> {{ containerSelected?.status }} </span>
-    </div>
-
-    <div class="flex items-center gap-4 mb-4">
-        <label class="font-semibold w-24"> Ultimo nivel lleno: </label>
-        <span class="font-semibold w-24"> {{ containerSelected?.last_fill_level }} </span>
-    </div>
-
-    <div class="flex items-center gap-4 mb-4">
-        <label class="font-semibold w-24"> Ultimo fecha de actualización: </label>
-        <span class="font-semibold w-24"> {{ containerSelected?.last_updated | date:"short" }} </span>
-    </div>
-
-    <div class="flex justify-content-end gap-2">
+    <div class="flex justify-content-end mt-4">
         <p-button label="Salir" severity="primary" (click)="displayDialog = false"></p-button>
     </div>
 </p-dialog>
