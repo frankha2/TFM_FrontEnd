@@ -1,5 +1,7 @@
 .topbar {
     width: 100%;
+    background-color: #89c3ca;
+    margin: 0;
 }
 
 @media screen and (max-width : 668px) {
@@ -34,15 +36,19 @@ ul {
 }
 
 ul li:hover {
-    background-color: #f0f0f0;
+    background-color: rgb(159, 199, 201);
 }
 
 ul li.active {
-    background-color: #007ad9;
-    color: white;
+    background-color: rgb(159, 199, 201);
+    color: #89c3ca;
 }
 
 a {
     text-decoration: none;
     color: white;
+}
+
+a:hover {
+    color:  rgb(117, 160, 113);
 }

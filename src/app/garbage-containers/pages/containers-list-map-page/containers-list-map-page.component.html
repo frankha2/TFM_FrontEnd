@@ -1,7 +1,21 @@
-<div class="m-4">
-    <p-panel header="Mapa de los contenedores">
-        <div class="flex justify-content-center align-items-center">
+<div class="container" style="overflow-y: auto;">
+    <div class="flex flex-column justify-content-center align-items-center gap-3">
+
+        <p-panel header="Mapa de los contenedores" class="mx-4" styleClass="width: 90%;">
+            
             <app-map-list-component [containersList]="containersList"></app-map-list-component>
-        </div>
-    </p-panel>
+        </p-panel>
+
+        <p-card class="flex justify-content-center">
+            <p-button
+                label="Gestionar Contenedores"
+                (click)="onShowRoute()"
+            >
+
+            </p-button>
+        </p-card>
+        
+    </div>
+
+
 </div>
