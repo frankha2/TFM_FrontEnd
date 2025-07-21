@@ -26,12 +26,12 @@ import { Router } from "@angular/router";
         IconField, 
         InputIcon 
     ],
-    selector: 'app-containers-list',
-    templateUrl: './containers-list.component.html',
-    styleUrl: './containers-list.component.scss'
+    selector: 'app-manage-containers',
+    templateUrl: './manage-containers-page.component.html',
+    styleUrl: './manage-containers-page.component.scss'
 })
 
-export class ContainersListPageComponent implements OnInit {
+export class ManageContainersPageComponent implements OnInit {
 
     public visibleCreated: boolean = false;
 

@@ -38,7 +38,7 @@ export class MapListContainersComponent implements OnInit, AfterViewInit {
     this.showRoutes();
     this.fitMap();
   }
- 
+  // Inicializa el mapa. 
   private initMap(): void {
     this.map = L.map('map').setView([40.416929035485396, -3.698773731337271], 13);
 
@@ -47,7 +47,7 @@ export class MapListContainersComponent implements OnInit, AfterViewInit {
     }).addTo(this.map);
 
   }
-
+  // Agrega las ubicaciones a mostrar en el mapa.
   private showRoutes(): void {
     //ruta
     this.containersList.forEach((resp, i) => {
@@ -71,7 +71,7 @@ export class MapListContainersComponent implements OnInit, AfterViewInit {
     });
 
   }
-
+  
   fitMap() {
     const latLngs = this.locations.map(loc => L.latLng(loc.lat, loc.lng));
     const bounds = L.latLngBounds(latLngs);

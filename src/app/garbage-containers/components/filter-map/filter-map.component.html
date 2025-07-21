@@ -1,0 +1,28 @@
+<p-panel header="Filtros de busqueda">
+    <p-tree [value]="fillLevels" selectionMode="single" class="flex w-full md:w-[30rem]" (onNodeSelect)="onSelectStatus($event)">
+
+        <ng-template pTemplate="header">
+            <ng-container>
+                <div class="card flex flex-column justify-center">
+                    <div class="grid mb-4">
+                        <label class="col-8"> Nivel de llenado: </label>
+                        <input type="text" pInputText [disabled]="true" [value]="levelSelected" class="col-4"/>
+                        <p-slider (onSlideEnd)="onSelectFillLevel($event)" class="w-full mt-5" />
+                    </div>
+                </div>
+            </ng-container>
+
+        </ng-template>
+
+        <ng-template let-item pTemplate="url">
+            <ng-container class="m-0">
+                <label [for]="item.key" class="ml-2"> {{ item.label }} </label>
+            </ng-container>
+                
+        </ng-template>
+
+        <ng-template let-item pTemplate="default">
+            <b> {{ item.label }} </b>
+        </ng-template>
+    </p-tree>
+</p-panel>
