@@ -8,9 +8,10 @@ import { CardModule } from "primeng/card";
 import { TableModule } from "primeng/table";
 import { CommonModule } from "@angular/common";
 import { Router } from "@angular/router";
+import { FilterMapComponent } from "../../components/filter-map/filter-map.component";
 
 @Component({
-    imports: [ CommonModule, MapListContainersComponent, CardModule, TableModule,  PanelModule, ButtonModule ],
+    imports: [ CommonModule, MapListContainersComponent, FilterMapComponent, CardModule, TableModule,  PanelModule, ButtonModule ],
     selector: 'app-containers-list-map-page',
     templateUrl: './containers-list-map-page.component.html',
     styleUrls: ['./containers-list-map-page.component.scss']
@@ -22,12 +23,6 @@ export class ContainersListMapPageComponent implements OnInit {
 
     private router = inject(Router);
 
-    value: any[] = [
-        {
-            ruta: 'algo'
-        }
-    ]
-
     private http = inject(ContainersService); 
 
     ngOnInit(): void {
@@ -35,7 +30,7 @@ export class ContainersListMapPageComponent implements OnInit {
         this.containersList = response;
     }
 
-    onShowRoute() {
+    onGoToManageContainers() {
         this.router.navigate(['/smartcity/containers/manage']);
     }
 
