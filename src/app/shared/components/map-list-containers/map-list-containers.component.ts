@@ -27,7 +27,6 @@ export class MapListContainersComponent implements OnInit, AfterViewInit {
     
   ngOnInit(): void {
     this.locations = this.containersList?.map((resp) => {
-      console.log(resp)
       return L.latLng(resp.location.latitude, resp.location.longitude);
     });
     
