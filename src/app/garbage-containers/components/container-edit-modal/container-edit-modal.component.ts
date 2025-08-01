@@ -67,6 +67,10 @@ export class ContainerEditModalComponent implements OnInit {
         this.containerData = response;
     }
 
+    onCloseModal() {
+        this.ref.close();
+    }
+
     onSubmit() {
         const { latitude, longitude, capacity_liters, status } = this.form.value;
         

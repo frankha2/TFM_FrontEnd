@@ -93,21 +93,25 @@
                             </td>
                             <td> {{ container.last_updated | date }} </td>
                             <td>
-                                <p-button
-                                    (click)="openContainerDetailsDialog(container)"
-                                    severity="secondary"
-                                >
-                                    <i  class="pi pi-eye">
-                                        Ver detalles
-                                    </i>
-                                </p-button>
-
-                                <p-button
-                                    (click)="onOpenEditModal(container.id)"
-                                    severity="warn"
-                                >
-                                    <i class="pi pi-pencil"></i>
-                                </p-button>
+                                <div class="flex justify-content-center align-items-center gap-2">
+                                    <p-button
+                                        (click)="onOpenEditModal(container.id)"
+                                        severity="warn"
+                                        pTooltip="Editar Contenedor"
+                                        tooltipPosition="top"
+                                    >
+                                        <i class="pi pi-pencil"></i>
+                                    </p-button>
+    
+                                    <p-button
+                                        (click)="deleteContainer(container?.id)"
+                                        severity="danger"
+                                        pTooltip="Eliminar Contenedor"
+                                        tooltipPosition="top"
+                                    >
+                                        <i  class="pi pi-times"></i>
+                                    </p-button>
+                                </div>
                             </td>
                         </tr>
                     </ng-template>

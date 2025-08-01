@@ -15,6 +15,7 @@ import { Router } from "@angular/router";
 import { Status, StatusItems } from "../../../shared/interfaces/status.interface";
 import { ContainerEditModalComponent } from "../../components/container-edit-modal/container-edit-modal.component";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
     imports: [ 
@@ -22,6 +23,7 @@ import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
         ButtonModule, 
         InputTextModule, 
         ReactiveFormsModule,
+        TooltipModule,
         TableModule, 
         DialogModule, 
         CardModule, 
@@ -119,7 +121,7 @@ export class ManageContainersPageComponent implements OnInit {
     }
        
     // 
-    openContainerDetailsDialog(container: ContainersResponse) {
+    deleteContainer(container: ContainersResponse) {
         // this.visible = true;
         // this.formGroup.patchValue({
         //     latitude: container.location.latitude,

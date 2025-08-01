@@ -16,11 +16,11 @@
         </div>
         <div class="flex flex-row justify-content-between">
             <label for="stat" class="flex justify-content-center align-items-center font-bold">Estado:</label>
-            <p-select [options]="itemStatus" optionLabel="value" optionValue="key" placeholder="Elegir estado" class="w-8 font-medium" formControlName="status" required/>
+            <p-select [options]="itemStatus" appendTo="body" optionLabel="value" optionValue="key" placeholder="Elegir estado" class="w-8 font-medium" formControlName="status" required/>
         </div>
     </div>
     <div class="flex justify-content-between mt-5">
-        <p-button label="Cancelar" severity="secondary" (click)="visible = false" />
+        <p-button label="Cancelar" severity="secondary" (click)="onCloseModal()" />
         <p-button type="submit" label="Editar" [disabled]="form.valid" />
     </div>
 </form>
