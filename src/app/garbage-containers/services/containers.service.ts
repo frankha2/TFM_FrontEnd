@@ -1,8 +1,7 @@
-import { inject, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { ContainersResponse } from "../interfaces/containers-response.interface";
 import { ContainerCreated } from "../interfaces/container-created.interface";
-import { HttpClient } from "@angular/common/http";
-
+import { FormGroup } from "@angular/forms";
 @Injectable({
     providedIn: 'root',
 })
@@ -53,14 +52,31 @@ export class ContainersService  {
 
     // private _http = inject(HttpClient);
 
-    getAllContainers() {
+    getAllTest() {
+        return this.containers;
+    }
+
+    getAllContainers(value: FormGroup)  {
+        // const params = {
+        //     fillLevel: value.get('fillLevel')?.value || 0,
+        //     status: value.get('status')?.value || 'Todos'
+        // }
+
         return this.containers;
         // return this._http.get<ContainersResponse[]>(`http://192.168.13.102:8080/api/v1/containers`);
     }
 
-    createContainer(newContainer: ContainerCreated) {
+    getContainerById(id: string) {
+        return this.containers[0];
+        // return this._http.get<ContainersResponse>(`http://192.168.13.102:8080/api/v1/containers/${id}`);
+    }
 
-    //    return this._http.post('http://192.168.13.102:8080/api/v1/containers', newContainer);
+    createContainer(newContainer: ContainerCreated) {
+        // return this._http.post('http://192.168.13.102:8080/api/v1/containers', newContainer);
+    }
+
+    editContainer(container: ContainerCreated) {
+        // return this._http.patch('http://192.168.13.102:8080/api/v1/containers', newContainer)
     }
 
 }

@@ -18,13 +18,13 @@ export class OptimizedRoutesComponent implements OnInit {
     private http = inject(ContainersService); 
 
     ngOnInit(): void {
-        const response = this.http.getAllContainers()
+        const response = this.http.getAllTest()
         this.containersList = response;
     }
 
     recalculateRoute() {
         
-        const response = this.http.getAllContainers()
+        const response = this.http.getAllTest()
         this.containersList = response;
         // .subscribe({
         //     next: (response) => {

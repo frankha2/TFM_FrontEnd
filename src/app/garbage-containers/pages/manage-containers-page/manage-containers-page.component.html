@@ -49,7 +49,7 @@
 
                             <p-iconfield iconPosition="left" class="ml-auto">
                                 <p-button
-                                    (click)="openCreateContainerDialog()"
+                                    (click)="openCreateContainerModal()"
                                 >
                                     Agregar Contenedor
                                     <i class="pi pi-plus"></i>
@@ -93,20 +93,31 @@
                             </td>
                             <td> {{ container.last_updated | date }} </td>
                             <td>
-                                <p-button
-                                    (click)="openContainerDetailsDialog(container)"
-                                    severity="secondary"
-                                >
-                                    <i  class="pi pi-eye">
-                                        Ver detalles
-                                    </i>
-                                </p-button>
+                                <div class="flex justify-content-center align-items-center gap-2">
+                                    <p-button
+                                        (click)="onOpenEditModal(container.id)"
+                                        severity="warn"
+                                        pTooltip="Editar Contenedor"
+                                        tooltipPosition="top"
+                                    >
+                                        <i class="pi pi-pencil"></i>
+                                    </p-button>
+    
+                                    <p-button
+                                        (click)="deleteContainer(container?.id)"
+                                        severity="danger"
+                                        pTooltip="Eliminar Contenedor"
+                                        tooltipPosition="top"
+                                    >
+                                        <i  class="pi pi-times"></i>
+                                    </p-button>
+                                </div>
                             </td>
                         </tr>
                     </ng-template>
                     <ng-template emptymessage>
                         <tr>
-                            <td colspan="4">No se encontraron Contenedores</td>
+                            <td colspan="7">No se encontraron Contenedores</td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -117,20 +128,27 @@
 
 </div>
 <!-- Este es el dialogo que muestra los datos de cada contenedor -->
-<p-dialog header="Crear Nuevo Contenedor" [modal]="true"  [style]="{ width: '25rem' }">
-    <span class="p-text-secondary block mb-8">Ingrese la información del contenedor.</span>
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-        <div class="flex items-center gap-4 mb-4">
-            <label for="username" class="font-semibold w-24">Latitud</label>
-            <input pInputText id="username" class="flex-auto" autocomplete="off" formControlName="latitude" required/>
+<!-- <p-dialog header="Crear Nuevo Contenedor" [modal]="true" [(visible)]="visibleCreated" [style]="{ width: '25rem' }">
+    <span class="p-text-secondary block mb-7">Ingrese la información del contenedor.</span>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="flex flex-column row-gap-3">
+        
+            <div class="flex flex-row justify-content-between">
+                <label for="lat" class="flex justify-content-center align-items-center font-bold">Latitud:</label>
+                <input pInputText type="number" min="-90" max="90" pattern="[+-]?\d+(\.\d{1,2})?" id="lat" class="w-8 font-medium " autocomplete="off" formControlName="latitude"/>
+            </div>
+            <div class="flex flex-row justify-content-between">
+                <label for="long" class="flex justify-content-center align-items-center font-bold">Longitud:</label>
+                <input pInputText type="number" min="-180" max="180" pattern="[+-]?\d+(\.\d{1,2})?" id="long" class="w-8 font-medium" autocomplete="off" formControlName="longitude"/>
+            </div>
+            <div class="flex flex-row justify-content-between">
+                <label for="capacity" class="flex justify-content-center align-items-center font-bold">Capacidad:</label>
+                <input pInputText type="number" min="0" step="1" id="capacity" class="w-8 font-medium" autocomplete="off" formControlName="capacity_liters"/>
+            </div>
         </div>
-        <div class="flex items-center gap-4 mb-8">
-            <label for="email" class="font-semibold w-24">Longitud</label>
-            <input pInputText id="email" class="flex-auto" autocomplete="off" formControlName="longitude" required/>
-        </div>
-        <div class="flex justify-end gap-2">
+        <div class="flex justify-content-between mt-5">
             <p-button label="Cancelar" severity="secondary" (click)="visibleCreated = false" />
-            <p-button type="submit" label="Guardar" [disabled]="!formGroup.valid" />
+            <p-button type="submit" label="Guardar" [disabled]="form.invalid" />
         </div>
     </form>
-</p-dialog>
+</p-dialog> -->

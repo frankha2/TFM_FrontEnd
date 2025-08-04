@@ -4,45 +4,45 @@
     </div>
 </p-panel>
 
-<p-dialog
+<!-- <p-dialog
     [header]="`Punto de recogida ${ collectionPoint }`"
     [modal]="true"
     [closable]="false"
     [(visible)]="displayDialog"
     [style]="{ width: '25rem' }"
 >
+    <span class="p-text-secondary block mb-6">Información del contenedor.</span>
+    <div class="flex flex-column row-gap-3">
 
-    <div class="flex flex-column gap-3 mt-4">
-
-        <div class="grid">
-            <label class="col-5 font-bold w-24"> Contenedor: </label>
-            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="collectionPoint"/>
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Contenedor: </label>
+            <input pInputText [disabled]="true" class="font-medium" autocomplete="off" [value]="collectionPoint"/>
         </div>
-        <div class="grid">
-            <label class="col-5 font-bold w-24"> Capacidad: </label>
-            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="containerSelected?.capacity_liters"/>
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Capacidad: </label>
+            <input pInputText [disabled]="true" class="font-medium" autocomplete="off" [value]="containerSelected?.capacity_liters"/>
         </div>
     
-        <div class="grid">
-            <label class="col-5 font-bold w-24"> Estado: </label>
-            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="containerSelected?.status"/>
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Estado: </label>
+            <input pInputText [disabled]="true" class="font-medium" autocomplete="off" [value]="containerSelected?.status"/>
             
         </div>
     
-        <div class="grid">
-            <label class="col-5 font-bold w-24"> Ultimo nivel lleno: </label>
-            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="containerSelected?.last_fill_level"/>
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Ultimo nivel lleno: </label>
+            <input pInputText [disabled]="true" class="font-medium" autocomplete="off" [value]="containerSelected?.last_fill_level"/>
             
         </div>
     
-        <div class="grid">
-            <label class="col-5 font-bold w-24"> Actualizado: </label>
-            <input pInputText [disabled]="true" class="col-5 font-medium w-24" autocomplete="off" [value]="`${containerSelected?.last_updated}`"/>
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Actualizado: </label>
+            <input pInputText [disabled]="true" class="font-medium" autocomplete="off" [value]="`${containerSelected?.last_updated}`"/>
         </div>
 
     </div>
 
-    <div class="flex justify-content-end mt-4">
+    <div class="flex justify-content-end mt-6">
         <p-button label="Salir" severity="primary" (click)="displayDialog = false"></p-button>
     </div>
-</p-dialog>
+</p-dialog> -->
