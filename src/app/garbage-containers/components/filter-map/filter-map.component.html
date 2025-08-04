@@ -1,28 +1,38 @@
 <p-panel header="Filtros de busqueda">
-    <p-tree [value]="fillLevels" selectionMode="single" class="flex w-full md:w-[30rem]" (onNodeSelect)="onSelectStatus($event)">
-
-        <ng-template pTemplate="header">
-            <ng-container>
-                <div class="card flex flex-column justify-center">
-                    <div class="grid mb-4">
-                        <label class="col-8"> Nivel de llenado: </label>
-                        <input type="text" pInputText [disabled]="true" [value]="levelSelected" class="col-4"/>
-                        <p-slider (onSlideEnd)="onSelectFillLevel($event)" class="w-full mt-5" />
+    <form [formGroup]="form" class="flex flex-column gap-3" (ngSubmit)="onSubmit()">
+        <p-tree [value]="fillLevels" class="flex w-full md:w-[30rem]" selectionMode="single" (onNodeSelect)="onSelectStatus($event)">
+    
+            <ng-template pTemplate="header">
+                <ng-container>
+                    <div class="card flex flex-column justify-center">
+                        <div class="grid mb-4">
+                            <label class="col-8"> Nivel de llenado: </label>
+                            <input type="text" pInputText [disabled]="true" [value]="form.get('fillLevel')?.value" class="col-4"/>
+                            <p-slider (onSlideEnd)="onSelectFillLevel($event)" class="w-full mt-5" />
+                        </div>
                     </div>
-                </div>
-            </ng-container>
+                </ng-container>
+    
+            </ng-template>
+    
+            <ng-template let-item pTemplate="url">
+                <ng-container class="m-0">
+                    <label [for]="item.key" class="ml-2"> {{ item.label }} </label>
+                </ng-container>
+                    
+            </ng-template>
 
-        </ng-template>
-
-        <ng-template let-item pTemplate="url">
-            <ng-container class="m-0">
-                <label [for]="item.key" class="ml-2"> {{ item.label }} </label>
-            </ng-container>
-                
-        </ng-template>
-
-        <ng-template let-item pTemplate="default">
-            <b> {{ item.label }} </b>
-        </ng-template>
-    </p-tree>
+            <ng-template let-item pTemplate="default">
+                <b> {{ item.label }} </b>
+            </ng-template>
+        </p-tree>
+        <div class="flex mt-4 w-full">
+            <p-button
+                styleClass="flex align-end"
+                type="submit"
+                label="Aplicar Filtros"
+                class="w-full"
+            ></p-button>
+        </div>
+    </form>
 </p-panel>

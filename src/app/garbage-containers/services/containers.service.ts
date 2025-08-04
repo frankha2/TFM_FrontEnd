@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ContainersResponse } from "../interfaces/containers-response.interface";
 import { ContainerCreated } from "../interfaces/container-created.interface";
+import { FormGroup } from "@angular/forms";
 @Injectable({
     providedIn: 'root',
 })
@@ -51,7 +52,16 @@ export class ContainersService  {
 
     // private _http = inject(HttpClient);
 
-    getAllContainers()  {
+    getAllTest() {
+        return this.containers;
+    }
+
+    getAllContainers(value: FormGroup)  {
+        // const params = {
+        //     fillLevel: value.get('fillLevel')?.value || 0,
+        //     status: value.get('status')?.value || 'Todos'
+        // }
+
         return this.containers;
         // return this._http.get<ContainersResponse[]>(`http://192.168.13.102:8080/api/v1/containers`);
     }

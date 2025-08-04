@@ -1,0 +1,30 @@
+<span class="p-text-secondary block mb-6">Información del contenedor.</span>
+    <div class="flex flex-column row-gap-3">
+
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Capacidad: </label>
+            <input pInputText [disabled]="true" class="font-medium w-8" [value]="containerSelected.capacity_liters"/>
+        </div>
+    
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Estado: </label>
+            <input pInputText [disabled]="true" class="font-medium w-8" [value]="containerSelected.status"/>
+            
+        </div>
+    
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Ultimo nivel: </label>
+            <input pInputText [disabled]="true" class="font-medium w-8" [value]="containerSelected.last_fill_level"/>
+            
+        </div>
+    
+        <div class="flex flex-row justify-content-between">
+            <label class="flex justify-content-center align-items-center font-bold"> Actualizado: </label>
+            <input pInputText [disabled]="true" class="font-medium w-8" [value]="`${containerSelected.last_updated}`"/>
+        </div>
+
+    </div>
+
+    <div class="flex justify-content-end mt-6">
+        <p-button label="Salir" severity="primary" (click)="onCloseModal()"></p-button>
+    </div>

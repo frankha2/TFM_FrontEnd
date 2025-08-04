@@ -50,9 +50,7 @@ export class ContainerEditModalComponent implements OnInit {
 
         const latitude: number = location.latitude;
         const longitude: number = location.longitude;
-        
-        console.log(location, capacity_liters, status)
- 
+         
         this.form = this.fb.group({
             latitude: [latitude, Validators.required],
             longitude: [longitude, Validators.required],
