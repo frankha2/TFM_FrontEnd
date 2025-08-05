@@ -39,11 +39,11 @@ export class ManageContainersPageComponent implements OnInit {
 
     public containers_response: ContainersResponse[] = [];
 
-    public itemStatus: StatusItems[] = [
-        { key: 1, value: Status.LOW },
-        { key: 2, value: Status.MEDIUM },
-        { key: 3, value: Status.HIGH }
-    ];
+    // public itemStatus: StatusItems[] = [
+    //     { key: 1, value: Status.LOW },
+    //     { key: 2, value: Status.MEDIUM },
+    //     { key: 3, value: Status.HIGH }
+    // ];
     
     public get response() : ContainersResponse[] {
         return this.containers_response || [];
@@ -65,7 +65,7 @@ export class ManageContainersPageComponent implements OnInit {
     onReturnPage() {
         this.router.navigate(['/smartcity/containers/map-containers']);
     }
-
+    // Abre el modal para crear un nuevo contenedor.
     openCreateContainerModal() {
         this.ref = this.dialogService.open(NewContainerComponent, {
             header: 'Crear contenedor',
@@ -96,7 +96,7 @@ export class ManageContainersPageComponent implements OnInit {
         });
     }
 
-    //
+    // Abre el modal para editar el contenedor seleccionado.
     onOpenEditModal(id: string) {
         this.ref = this.dialogService.open(ContainerEditModalComponent, {
             header: 'Editar contenedor',
@@ -109,13 +109,10 @@ export class ManageContainersPageComponent implements OnInit {
         });
     }
        
-    // 
-    deleteContainer(container: ContainersResponse) {
-        // this.visible = true;
-        // this.formGroup.patchValue({
-        //     latitude: container.location.latitude,
-        //     longitude: container.location.longitude
-        // });
+    // Elimina el contenedor seleccionado.
+    deleteContainer(id: string) {
+        this.containers_response = this.containers_response.filter(c => c.id !== id);
+        // this.containersService.deleteContainer(id);
     }
     
 }

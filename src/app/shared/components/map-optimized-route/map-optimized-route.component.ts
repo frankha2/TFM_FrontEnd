@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Input, OnInit } from "@angular/core";
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { ContainersResponse } from "../../../garbage-containers/interfaces/containers-response.interface";
+import { PanelModule } from "primeng/panel";
 
 export const DEFAULT_LAT = 4.6497;
 export const DEFAULT_LON =  -74.0808;
@@ -14,7 +15,7 @@ const shadowUrl = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/m
     selector: 'app-map-optimized-route',
     templateUrl: './map-optimized-route.component.html',
     styleUrl: './map-optimized-route.component.scss',
-    imports: []
+    imports: [ PanelModule ]
 })
 
 export class MapOptimizedRouteComponent implements OnInit, AfterViewInit {
@@ -27,7 +28,6 @@ export class MapOptimizedRouteComponent implements OnInit, AfterViewInit {
     
   ngOnInit(): void {
     this.ubicaciones = this.containersList?.map((resp) => {
-      console.log(resp)
       return L.latLng(resp.location.latitude, resp.location.longitude);
     });
     

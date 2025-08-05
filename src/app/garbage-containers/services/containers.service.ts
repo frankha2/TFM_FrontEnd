@@ -79,4 +79,8 @@ export class ContainersService  {
         // return this._http.patch('http://192.168.13.102:8080/api/v1/containers', newContainer)
     }
 
+    deleteContainer(id: string) {
+        // return this._http.delete(`http://192.168.13.102:8080/api/v1/containers/${id}`);
+    }
+
 }
