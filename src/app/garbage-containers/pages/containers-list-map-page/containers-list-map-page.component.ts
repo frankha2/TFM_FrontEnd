@@ -57,7 +57,7 @@ export class ContainersListMapPageComponent implements OnInit {
     }
 
     onGoToManageContainers() {
-        this.router.navigate(['/smartcity/containers/manage']);
+        this.router.navigate(['/smartcity/containers/map-containers/manage']);
     }
 
     onStatusSelected( filterForm: FormGroup ) {

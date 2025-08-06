@@ -11,11 +11,16 @@ export const GarbageContainersRoutes: Routes = [
     },
     {
         path: 'map-containers',
-        component: ContainersListMapPageComponent
-    },
-    {
-        path: 'manage',
-        component: ManageContainersPageComponent
+        children: [
+            {
+                path: '',
+                component: ContainersListMapPageComponent
+            },
+            {
+                path: 'manage',
+                component: ManageContainersPageComponent
+            }
+        ]
     },
     {
         path: 'generate-route',

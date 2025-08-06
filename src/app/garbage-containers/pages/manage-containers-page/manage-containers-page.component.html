@@ -1,154 +1,128 @@
-<div class="flex flex-column m-4 gap-4">
+<p-panel styleClass="flex flex-column gap-5" [style]="{ height: '80vh' }">
+    <ng-template #header>
+        <div class="flex flex-row justify-content-between align-items-between w-full">
+            <span class="font-bold"> Contenedores </span>
+
+            <p-button 
+                icon="pi pi-arrow-left"
+                label="Regresar"
+                severity="info"
+                (click)="onReturnPage()"
+            ></p-button>
+        </div>
+    </ng-template>
+    
+    <p-card>
+        <p-table
+            #dt1
+            [tableStyle]="{'text-align': 'center', 'overflow-x': 'auto'}"
+            [value]="response"
+            [rows]="10"
+            [rowsPerPageOptions]="[10, 20, 50]"
+            [paginator]="true"
+            [globalFilterFields]="['status']"
+        >
+    
+            <ng-template #caption>
+                <div class="flex">
+                    <p-iconfield iconPosition="right">
+                        <p-inputicon>
+                            <i class="pi pi-search"></i>
+                        </p-inputicon>
+                        <input
+                            #globalFilter
+                            pInputText 
+                            type="text"
+                            placeholder="Buscar contenedor..."
+                            style="width: 100%;"
+                            (input)="dt1.filterGlobal(globalFilter.value, 'contains')"
+                        />
+    
+                    </p-iconfield>
+    
+                    <p-iconfield iconPosition="left" class="ml-auto">
+                        <p-button
+                            (click)="openCreateContainerModal()"
+                        >
+                            Agregar
+                            <i class="pi pi-plus"></i>
+                        </p-button>
+                    </p-iconfield>
+                </div>
+            </ng-template>
+            <ng-template #header>
+                <tr>
+                    <th>Contenedor</th>
+                    <th>Latitud</th>
+                    <th>Longitud</th>
+                    <th>Capacidad</th>
+                    <th>Estado de Llenado</th>
+                    <th>Fecha de actualización</th>
+                    <th>Acciones</th>
+                </tr>
+            </ng-template>
+            <ng-template #body let-container let-rowIndex="rowIndex">
+                @if (loading()) {
+                    <tr>
+                        @for (_ of [1,2,3,4,5,6,7]; track $index) {
+
+                            <td><p-skeleton></p-skeleton></td>
+                        }
+                    </tr>
+                } @else if (containers_response.length > 0) {
+                    <tr [pSelectableRow]="container">
+                        <td> {{ rowIndex + 1 }} </td>
+                        <td> {{ container.location.latitude }} </td>
+                        <td> {{ container.location.longitude }} </td>
+                        <td> {{ container.capacity_liters }} </td>
+                        <td> 
+                            <p-button
+                                [severity]="container.status === 'high' ? 'danger' : container.status === 'medium' ? 'warn' : 'success'"
+                                [label]="container.status"
+                                
+                                iconPos="left"
+                                styleClass="p-button-text"
+                                class="w-full"
+                                [disabled]="true"
+                            >
+                                <i class="pi" 
+                                    [ngClass]="{'pi-ban': container.status === 'high', 
+                                                'pi-exclamation-triangle': container.status === 'medium', 
+                                                'pi-check': container.status === 'low'}">
+                                </i>
+                            </p-button>
+                        </td>
+                        <td> {{ container.last_updated | date }} </td>
+                        <td>
+                            <div class="flex justify-content-center align-items-center gap-2">
+                                <p-button
+                                    (click)="onOpenEditModal(container.id)"
+                                    severity="warn"
+                                    pTooltip="Editar Contenedor"
+                                    tooltipPosition="top"
+                                >
+                                    <i class="pi pi-pencil"></i>
+                                </p-button>
+        
+                                <p-button
+                                    (click)="deleteContainer(container?.id)"
+                                    severity="danger"
+                                    pTooltip="Eliminar Contenedor"
+                                    tooltipPosition="top"
+                                >
+                                    <i  class="pi pi-times"></i>
+                                </p-button>
+                            </div>
+                        </td>
+                    </tr>
+                } @else {
+                    <tr>
+                        <td colspan="7">No se encontraron Contenedores</td>
+                    </tr>
+                }
+            </ng-template>
+        </p-table>
+    </p-card>
+
   
-    <div class="flex flex-column justify-content-center align-items-center gap-4">
-        
-        <div class="flex flex-row justify-content-between align-items-center w-10">
-            <div class="">
-                <h1 class="m-0">Contenedores</h1>
-            </div>
-    
-            <div>
-                <p-button 
-                    icon="pi pi-arrow-left"
-                    label="Regresar al mapa"
-                    (click)="onReturnPage()"
-                ></p-button>
-                
-            </div>
-        </div>
-
-        <div class="flex justify-content-center align-items-center">
-            <div class="flex justify-content-center align-items-center mt-4"> 
-    
-                <p-table
-                    #dt1
-                    [tableStyle]="{'text-align': 'center', 'overflow-x': 'auto'}"
-                    [value]="response"
-                    [rows]="10"
-                    [rowsPerPageOptions]="[10, 20, 50]"
-                    [paginator]="true"
-                    [globalFilterFields]="['status']"
-                >
-    
-                    <ng-template #caption>
-                        <div class="flex">
-                            <p-iconfield iconPosition="right">
-                                <p-inputicon>
-                                    <i class="pi pi-search"></i>
-                                </p-inputicon>
-                                <input
-                                    #globalFilter
-                                    pInputText 
-                                    type="text"
-                                    placeholder="Buscar contenedor..."
-                                    style="width: 100%;"
-                                    (input)="dt1.filterGlobal(globalFilter.value, 'contains')"
-                                />
-    
-                            </p-iconfield>
-
-                            <p-iconfield iconPosition="left" class="ml-auto">
-                                <p-button
-                                    (click)="openCreateContainerModal()"
-                                >
-                                    Agregar Contenedor
-                                    <i class="pi pi-plus"></i>
-                                </p-button>
-                            </p-iconfield>
-                        </div>
-                    </ng-template>
-                    <ng-template #header>
-                        <tr>
-                            <th>Contenedor</th>
-                            <th>Latitud</th>
-                            <th>Longitud</th>
-                            <th>Capacidad</th>
-                            <th>Estado de Llenado</th>
-                            <th>Fecha de actualización</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template #body let-container let-rowIndex="rowIndex">
-                        <tr [pSelectableRow]="container">
-                            <td> {{ rowIndex + 1 }} </td>
-                            <td> {{ container.location.latitude }} </td>
-                            <td> {{ container.location.longitude }} </td>
-                            <td> {{ container.capacity_liters }} </td>
-                            <td> 
-                                <p-button
-                                    [severity]="container.status === 'high' ? 'danger' : container.status === 'medium' ? 'warn' : 'success'"
-                                    [label]="container.status"
-                                   
-                                    iconPos="left"
-                                    styleClass="p-button-text"
-                                    class="w-full"
-                                    [disabled]="true"
-                                >
-                                    <i class="pi" 
-                                        [ngClass]="{'pi-ban': container.status === 'high', 
-                                                    'pi-exclamation-triangle': container.status === 'Medio', 
-                                                    'pi-check': container.status === 'Bajo'}">
-                                    </i>
-                                </p-button>
-                            </td>
-                            <td> {{ container.last_updated | date }} </td>
-                            <td>
-                                <div class="flex justify-content-center align-items-center gap-2">
-                                    <p-button
-                                        (click)="onOpenEditModal(container.id)"
-                                        severity="warn"
-                                        pTooltip="Editar Contenedor"
-                                        tooltipPosition="top"
-                                    >
-                                        <i class="pi pi-pencil"></i>
-                                    </p-button>
-    
-                                    <p-button
-                                        (click)="deleteContainer(container?.id)"
-                                        severity="danger"
-                                        pTooltip="Eliminar Contenedor"
-                                        tooltipPosition="top"
-                                    >
-                                        <i  class="pi pi-times"></i>
-                                    </p-button>
-                                </div>
-                            </td>
-                        </tr>
-                    </ng-template>
-                    <ng-template emptymessage>
-                        <tr>
-                            <td colspan="7">No se encontraron Contenedores</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
-      
-    </div>
-
-</div>
-<!-- Este es el dialogo que muestra los datos de cada contenedor -->
-<!-- <p-dialog header="Crear Nuevo Contenedor" [modal]="true" [(visible)]="visibleCreated" [style]="{ width: '25rem' }">
-    <span class="p-text-secondary block mb-7">Ingrese la información del contenedor.</span>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="flex flex-column row-gap-3">
-        
-            <div class="flex flex-row justify-content-between">
-                <label for="lat" class="flex justify-content-center align-items-center font-bold">Latitud:</label>
-                <input pInputText type="number" min="-90" max="90" pattern="[+-]?\d+(\.\d{1,2})?" id="lat" class="w-8 font-medium " autocomplete="off" formControlName="latitude"/>
-            </div>
-            <div class="flex flex-row justify-content-between">
-                <label for="long" class="flex justify-content-center align-items-center font-bold">Longitud:</label>
-                <input pInputText type="number" min="-180" max="180" pattern="[+-]?\d+(\.\d{1,2})?" id="long" class="w-8 font-medium" autocomplete="off" formControlName="longitude"/>
-            </div>
-            <div class="flex flex-row justify-content-between">
-                <label for="capacity" class="flex justify-content-center align-items-center font-bold">Capacidad:</label>
-                <input pInputText type="number" min="0" step="1" id="capacity" class="w-8 font-medium" autocomplete="off" formControlName="capacity_liters"/>
-            </div>
-        </div>
-        <div class="flex justify-content-between mt-5">
-            <p-button label="Cancelar" severity="secondary" (click)="visibleCreated = false" />
-            <p-button type="submit" label="Guardar" [disabled]="form.invalid" />
-        </div>
-    </form>
-</p-dialog> -->
+</p-panel>

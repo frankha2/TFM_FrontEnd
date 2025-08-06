@@ -5,9 +5,8 @@ import { ButtonModule } from "primeng/button";
 import { ContainersService } from "../../services/containers.service";
 import { ContainersResponse } from "../../interfaces/containers-response.interface";
 import { PanelModule } from "primeng/panel";
-import { MapListContainersComponent } from "../../../shared/components/map-list-containers/map-list-containers.component";
 @Component({
-    imports: [ MapListContainersComponent, CardModule, MapOptimizedRouteComponent, ButtonModule, PanelModule ],
+    imports: [ CardModule, MapOptimizedRouteComponent, ButtonModule, PanelModule ],
     selector: 'app-optimized-routes-component',
     templateUrl: './optimized-routes.component.html',
     styleUrl: './optimized-routes.component.scss'
@@ -15,7 +14,7 @@ import { MapListContainersComponent } from "../../../shared/components/map-list-
 
 export class OptimizedRoutesComponent implements OnInit {
 
-    public containersList: ContainersResponse[] = [];
+    public containersList =  signal<ContainersResponse[]>([]);
      public header: string = "Mapa";
      public routeOptimized = signal<boolean>(false); 
 
@@ -23,13 +22,13 @@ export class OptimizedRoutesComponent implements OnInit {
 
     ngOnInit(): void {
         const response = this.containerService.getAllTest()
-        this.containersList = response;
+        this.containersList.set(response);
     }
     // Obtimiza la ruta de recolecta.
     onOptimizeRoute() {
         this.routeOptimized.set(true);
-        const response = this.containerService.getAllTest()
-        this.containersList = response;
+        const response = this.containerService.getOptimizedRoute()
+        this.containersList.set(response);
         // .subscribe({
         //     next: (response) => {
         //         console.log('Route recalculated successfully:', response);
