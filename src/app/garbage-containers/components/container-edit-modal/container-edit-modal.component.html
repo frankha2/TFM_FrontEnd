@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="flex justify-content-between mt-5">
-        <p-button label="Cancelar" severity="secondary" (click)="onCloseModal()" />
-        <p-button type="submit" label="Editar" [disabled]="form.valid" />
+        <p-button label="Cancelar" severity="danger" (click)="onCloseModal()" />
+        <p-button type="submit" label="Editar" severity="info" [disabled]="form.valid" />
     </div>
 </form>

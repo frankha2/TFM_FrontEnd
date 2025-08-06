@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, signal } from "@angular/core";
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
 import { ContainersService } from "../../services/containers.service";
@@ -10,11 +10,14 @@ import { DialogModule } from "primeng/dialog";
 import { ContainersResponse } from "../../interfaces/containers-response.interface";
 import { Router } from "@angular/router";
 import { Status, StatusItems } from "../../../shared/interfaces/status.interface";
+import { SkeletonModule } from 'primeng/skeleton';
 import { ContainerEditModalComponent } from "../../components/container-edit-modal/container-edit-modal.component";
 import { DialogService, DynamicDialogRef } from "primeng/dynamicdialog";
 import { TooltipModule } from 'primeng/tooltip';
 import { NewContainerComponent } from "../../components/new-container/new-container.component";
 import { InputText } from "primeng/inputtext";
+import { PanelModule } from "primeng/panel";
+import { timeout } from "rxjs";
 
 @Component({
     imports: [ 
@@ -23,6 +26,8 @@ import { InputText } from "primeng/inputtext";
         TooltipModule,
         TableModule, 
         DialogModule, 
+        SkeletonModule,
+        PanelModule,
         CardModule, 
         DatePipe, 
         InputText,
@@ -38,12 +43,7 @@ import { InputText } from "primeng/inputtext";
 export class ManageContainersPageComponent implements OnInit {
 
     public containers_response: ContainersResponse[] = [];
-
-    // public itemStatus: StatusItems[] = [
-    //     { key: 1, value: Status.LOW },
-    //     { key: 2, value: Status.MEDIUM },
-    //     { key: 3, value: Status.HIGH }
-    // ];
+    public loading = signal<boolean>(false);
     
     public get response() : ContainersResponse[] {
         return this.containers_response || [];
@@ -57,7 +57,10 @@ export class ManageContainersPageComponent implements OnInit {
     private containersService = inject(ContainersService);
         
     ngOnInit(): void {
-
+        this.loading.set(true);
+        setTimeout(() => {
+            this.loading.set(false);
+        }, 1000);
         const response = this.containersService.getAllTest()
         this.containers_response = response;
     }

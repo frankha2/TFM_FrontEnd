@@ -30,18 +30,23 @@ ul {
 
 .menu-list {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
     justify-content: center;
     align-items: center;
 }
 
 ul li:hover {
-    background-color: rgb(159, 199, 201);
+    background-color: rgb(171, 218, 221);
 }
 
-ul li.active {
-    background-color: rgb(159, 199, 201);
-    color: #89c3ca;
+.menu-list li.active {
+    background-color: rgb(171, 218, 221);
+    color:  rgb(171, 218, 221);
+}
+
+.menu-list li.active a {
+    color:  rgb(117, 160, 113);
 }
 
 a {

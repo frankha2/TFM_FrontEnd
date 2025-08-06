@@ -6,9 +6,9 @@
                 <ng-container>
                     <div class="card flex flex-column justify-center">
                         <div class="grid mb-4">
-                            <label class="col-8"> Nivel de llenado: </label>
-                            <input type="text" pInputText [disabled]="true" [value]="form.get('fillLevel')?.value" class="col-4"/>
-                            <p-slider (onSlideEnd)="onSelectFillLevel($event)" class="w-full mt-5" />
+                            <label class="col-8"> Capacidad: </label>
+                            <input type="text" pInputText [disabled]="true" [value]="this.form.get('capacity')?.value" class="col-4"/>
+                            <p-slider formControlName="capacity" [min]="0" [max]="10000" [step]="500" class="w-full mt-5" />
                         </div>
                     </div>
                 </ng-container>
@@ -30,7 +30,8 @@
             <p-button
                 styleClass="flex align-end"
                 type="submit"
-                label="Aplicar Filtros"
+                label="Filtrar"
+                severity="success"
                 class="w-full"
             ></p-button>
         </div>

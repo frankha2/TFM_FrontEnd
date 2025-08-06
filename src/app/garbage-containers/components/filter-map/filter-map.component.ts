@@ -32,9 +32,6 @@ export class FilterMapComponent implements OnInit {
     // Emite el evento con los valores seleccionados de los filtros.
     filterForm = output<FormGroup>();
 
-    // Variables respecto a los 'estados' y 'nivel de llenado' de los contenedores seleccionados.
-    public selectedStatusNode: string = 'Todos';
-    public levelSelected: number = 0;
     // Formulario reactivo para los filtros de búsqueda.
     public form!: FormGroup;
 
@@ -64,22 +61,18 @@ export class FilterMapComponent implements OnInit {
 
     initForm() {
         this.form = this.fb.group({
-            fillLevel: [0],
+            capacity: ['0'],
             status: ['Todos']
         });
     }
-    // Guarda el valor seleccionado del nivel de llenado.
-    onSelectFillLevel(event: any) {
-        this.form?.get('fillLevel')?.setValue(event?.value);
 
-    }
     // Guarda el valor seleccionado del estado de los contenedores.
     onSelectStatus(event: any) {
         if (event?.node?.type !== 'encabezado') {
             this.form?.get('status')?.setValue(event?.node?.label);
-            this.selectedStatusNode = event?.node?.label;
         }
     }
+
     // Envía los valores seleccionados al componente padre.
     onSubmit() {
         this.filterForm?.emit(this.form);
