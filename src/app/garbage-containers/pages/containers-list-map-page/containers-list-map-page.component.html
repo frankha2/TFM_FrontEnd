@@ -1,7 +1,27 @@
-<div class="m-4">
-    <p-panel header="Mapa de los contenedores">
-        <div class="flex justify-content-center align-items-center">
-            <app-map-list-component [containersList]="containersList"></app-map-list-component>
+<div class="container" style="overflow-y: auto;">
+    <p-card>
+
+        <div class="grid">
+            <div class="col-9">
+                <app-map-list-component [containersList]="containersList"></app-map-list-component>
+            </div>
+                
+            <div class="col-3">
+                <app-filter-map-component (filterForm)="onStatusSelected($event)"></app-filter-map-component>
+            </div>
         </div>
-    </p-panel>
+
+        <p-card class="flex justify-content-center">
+            <p-button
+                label="Gestionar Contenedores"
+                severity="info"
+                (click)="onGoToManageContainers()"
+            >
+
+            </p-button>
+        </p-card>
+        
+    </p-card>
+
+
 </div>

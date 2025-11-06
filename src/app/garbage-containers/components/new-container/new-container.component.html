@@ -1,0 +1,21 @@
+ <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="flex flex-column row-gap-3">
+        
+            <div class="flex flex-row justify-content-between">
+                <label for="lat" class="flex justify-content-center align-items-center font-bold">Latitud:</label>
+                <input pInputText type="number" min="-90" max="90" pattern="[+-]?\d+(\.\d{1,2})?" id="lat" class="w-8 font-medium " autocomplete="off" formControlName="latitude"/>
+            </div>
+            <div class="flex flex-row justify-content-between">
+                <label for="long" class="flex justify-content-center align-items-center font-bold">Longitud:</label>
+                <input pInputText type="number" min="-180" max="180" pattern="[+-]?\d+(\.\d{1,2})?" id="long" class="w-8 font-medium" autocomplete="off" formControlName="longitude"/>
+            </div>
+            <div class="flex flex-row justify-content-between">
+                <label for="capacity" class="flex justify-content-center align-items-center font-bold">Capacidad:</label>
+                <input pInputText type="number" min="0" step="1" id="capacity" class="w-8 font-medium" autocomplete="off" formControlName="capacity_liters"/>
+            </div>
+        </div>
+        <div class="flex justify-content-between mt-5">
+            <p-button label="Cancelar" severity="danger" (click)="onCloseModal()" />
+            <p-button type="submit" label="Guardar" severity="info" [disabled]="form.invalid" />
+        </div>
+    </form>

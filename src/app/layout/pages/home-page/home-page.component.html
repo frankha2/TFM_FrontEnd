@@ -1,8 +1,13 @@
 <div class="flex flex-column home-page">
-    <div>
+    <div class="">
         <app-topbar></app-topbar>
     </div>
     <div class="container-body">
-        <router-outlet />
+        <p-card
+            [style]="{ margin: '10px', height: '98%', background: '#89c3ca' }"
+        >
+            <router-outlet />
+        </p-card>
+        
     </div>
 </div>

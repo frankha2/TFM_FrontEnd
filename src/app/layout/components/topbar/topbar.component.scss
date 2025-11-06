@@ -1,5 +1,7 @@
 .topbar {
     width: 100%;
+    background-color: #89c3ca;
+    margin: 0;
 }
 
 @media screen and (max-width : 668px) {
@@ -28,21 +30,30 @@ ul {
 
 .menu-list {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
     justify-content: center;
     align-items: center;
 }
 
 ul li:hover {
-    background-color: #f0f0f0;
+    background-color: rgb(171, 218, 221);
 }
 
-ul li.active {
-    background-color: #007ad9;
-    color: white;
+.menu-list li.active {
+    background-color: rgb(171, 218, 221);
+    color:  rgb(171, 218, 221);
+}
+
+.menu-list li.active a {
+    color:  rgb(117, 160, 113);
 }
 
 a {
     text-decoration: none;
     color: white;
+}
+
+a:hover {
+    color:  rgb(117, 160, 113);
 }

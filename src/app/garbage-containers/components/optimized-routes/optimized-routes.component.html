@@ -1,29 +1,45 @@
 <div class="container" style="overflow-y: auto;">
-    <div class="flex flex-column justify-content-center align-items-center">
-        <div class="flex flex-row justify-content-center align-items-center gap-8">
-            <h1>Ruta Obtimizada</h1>
-            <p-button (click)="recalculateRoute()" severity="secondary">
-                <i class="pi pi-refresh"></i>
-                <span class="ml-2">Recalcular Ruta</span>
-            </p-button>
+    <p-card>
+
+        <div class="grid">
+
+            <div class="col-12">
+                <app-map-optimized-route [containersList]="containersList()" ></app-map-optimized-route>
+            </div>
+    
+            @if (routeOptimized()) {
+                <div class="card col-12 p-0">
+                    <div class="flex flex-column justify-content-center align-items-center m-0">
+    
+                        <h2>Metricas de ruta</h2>
+                        <div class="flex flex-row gap-5">
+                            <p-card header="Distancia total" [style]="{ width: '25rem' }">
+                                <p class="m-0 font-bold">
+                                    15.8 km
+                                </p>
+                            </p-card>
+                            <p-card header="Estimación de tiempo" [style]="{ width: '25rem' }">
+                                <p class="m-0 font-bold">
+                                    2 Horas 30 Minutos
+                                </p>
+                            </p-card>
+                        </div>
+                    </div>
+                </div>
+            } @else {
+
+                <div class="col-12">
+                    <p-card class="flex justify-content-center">
+                        <p-button
+                            label="Optimizar Ruta"
+                            (click)="onOptimizeRoute()"
+                        >
+        
+                        </p-button>
+                    </p-card>
+                </div>
+            }
+    
         </div>
-        <p-card class="container-map">
-            <app-map-optimized-route [containersList]="containersList"></app-map-optimized-route>
-        </p-card>
-        <div>
-            <h1>Metricas de ruta</h1>
-        </div>
-        <div class="flex flex-row gap-2">
-            <p-card header="Distancia total" [style]="{ width: '25rem' }">
-                <p class="m-0">
-                    15.8 km
-                </p>
-            </p-card>
-            <p-card header="Estimación de tiempo" [style]="{ width: '25rem' }">
-                <p class="m-0">
-                    2 Horas 30 Minutos
-                </p>
-            </p-card>
-        </div>
-    </div>
+    </p-card>
 </div>
