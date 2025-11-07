@@ -9,19 +9,24 @@ import { Status, StatusItems } from "../../../shared/interfaces/status.interface
 import { SelectModule } from "primeng/select";
 import { ContainerCreated } from "../../interfaces/container-created.interface";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Toast } from 'primeng/toast';
+import { finalize } from "rxjs";
+import { MessageService } from "primeng/api";
 
 @Component({
-    imports: [ ReactiveFormsModule, ButtonModule, InputTextModule, SelectModule ],
+    imports: [ ReactiveFormsModule, ButtonModule, InputTextModule, SelectModule, Toast ],
     selector: 'app-container-edit-modal',
     templateUrl: './container-edit-modal.component.html',
-    styleUrls: ['./container-edit-modal.component.scss']
+    styleUrls: ['./container-edit-modal.component.scss'],
+    providers: [ MessageService ]
 })
 
 export class ContainerEditModalComponent implements OnInit {
 
     public id!: string; 
     public visible: boolean = false;
-    public containerData!: ContainersResponse;
+    public isLoading: boolean = false
+    public containerData: ContainersResponse = {} as ContainersResponse
 
     public itemStatus: StatusItems[] = [
         { key: 1, value: Status.LOW },
@@ -31,38 +36,50 @@ export class ContainerEditModalComponent implements OnInit {
 
     private fb = inject(FormBuilder);
     public ref = inject(DynamicDialogRef);
+
     private config = inject(DynamicDialogConfig);
+    private messageService: MessageService = inject(MessageService)
     private containersService = inject(ContainersService);
 
-    form!: FormGroup;     
+    public form!: FormGroup;     
 
     ngOnInit(): void {
         this.id = this.config?.data?.id;
 
-        this.onGetContainerById(this.id); 
         this.initForm();
+        this.onGetContainerById(); 
     }
 
     initForm() {
-        const { location, capacity_liters, status } = this.containerData;
-
-        const statusId = status === 'low' ? 1 : status === 'medium' ? 2 : 3;
-
-        const latitude: number = location.latitude;
-        const longitude: number = location.longitude;
          
         this.form = this.fb.group({
-            latitude: [latitude, Validators.required],
-            longitude: [longitude, Validators.required],
-            capacity_liters: [capacity_liters, Validators.required],
-            status: [statusId, Validators.required]
+            latitude: [null, [Validators.required]],
+            longitude: [null, [Validators.required]],
+            capacity_liters: [null, [Validators.required]],
+            status: ['']
         });
     }
 
-    onGetContainerById(id: string) {
-        const response = this.containersService.getContainerById(id);
+    onGetContainerById() {        
+        this.isLoading = true
 
-        this.containerData = response;
+        this.containersService.getContainerById(this.id)
+        .pipe(finalize(() => this.isLoading = false))
+        .subscribe({
+            next: (response: ContainersResponse) => {
+                                
+                this.form.setValue({ 
+                    latitude: response.location.latitude,
+                    longitude:  response.location.longitude,
+                    capacity_liters: response.capacity_liters,
+                    status: response.status === 'high' ? 3 : response.status === 'medium' ? 2 : 1
+                })
+            },
+            error: (error: HttpErrorResponse) => {
+                console.error(error.error.message)
+            }
+        })
+
     }
 
     onCloseModal() {
@@ -70,20 +87,21 @@ export class ContainerEditModalComponent implements OnInit {
     }
 
     onSubmit() {
-        const { latitude, longitude, capacity_liters, status } = this.form.value;
+        const { latitude, longitude, capacity_liters } = this.form.value;
         
-        const data: ContainerCreated = {latitude: latitude, longitude: longitude, capacity_liters: capacity_liters, status: status };
+        const data: ContainerCreated = {latitude: latitude, longitude: longitude, capacity_liters: capacity_liters };
 
-        this.containersService.editContainer(data);
-        // .subscribe(({
-        //     next: () => {
+        this.containersService.editContainer(this.id, data)
+        .subscribe(({
+            next: (resp: {message: string}) => {
 
-        //     },
-        //     error: (error: HttpErrorResponse) => {
-        //         console.error(error.error.message);
-        //     }
-        // }))
+                this.ref.close({edited: true, message: resp.message});
+            },
+            error: (error: HttpErrorResponse) => {
+                this.ref.close({edited: false, message: 'No se pudo editar el contenedor'})
+                
+            }
+        }))
         
-        this.ref.close();
     }
 }

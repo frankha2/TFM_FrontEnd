@@ -17,7 +17,11 @@ import { TooltipModule } from 'primeng/tooltip';
 import { NewContainerComponent } from "../../components/new-container/new-container.component";
 import { InputText } from "primeng/inputtext";
 import { PanelModule } from "primeng/panel";
-import { timeout } from "rxjs";
+import { finalize, timeout } from "rxjs";
+import { HttpErrorResponse } from "@angular/common/http";
+import { MessageService } from "primeng/api";
+import { Toast } from "primeng/toast";
+import { ContainerCreated } from "../../interfaces/container-created.interface";
 
 @Component({
     imports: [ 
@@ -32,12 +36,13 @@ import { timeout } from "rxjs";
         DatePipe, 
         InputText,
         IconField, 
-        InputIcon 
+        InputIcon,
+        Toast
     ],
-    providers: [ DialogService ],
+    providers: [ DialogService, MessageService ],
     selector: 'app-manage-containers',
     templateUrl: './manage-containers-page.component.html',
-    styleUrl: './manage-containers-page.component.scss'
+    styleUrl: './manage-containers-page.component.scss',
 })
 
 export class ManageContainersPageComponent implements OnInit {
@@ -45,8 +50,12 @@ export class ManageContainersPageComponent implements OnInit {
     public containers_response: ContainersResponse[] = [];
     public loading = signal<boolean>(false);
     
-    public get response() : ContainersResponse[] {
-        return this.containers_response || [];
+    public get response() {
+        return this.loading()
+        ? Array.from({ length: 7 }).map(() => ({}))
+        : this.containers_response.length > 0 
+        ? this.containers_response 
+        : [];
     }
 
     // @ts-ignore
@@ -54,15 +63,26 @@ export class ManageContainersPageComponent implements OnInit {
 
     private router = inject(Router);
     public dialogService = inject(DialogService);
-    private containersService = inject(ContainersService);
+    private messageService: MessageService = inject(MessageService)
+    private containerService = inject(ContainersService);
         
     ngOnInit(): void {
+        this.onGetContainers()
+    }
+
+    onGetContainers() {
         this.loading.set(true);
-        setTimeout(() => {
-            this.loading.set(false);
-        }, 1000);
-        const response = this.containersService.getAllTest()
-        this.containers_response = response;
+
+        this.containerService.getAllContainers()
+        .pipe(finalize(() => this.loading.set(false)))
+        .subscribe({
+            next: (response) => {
+                this.containers_response = response                
+            },
+            error: (error: HttpErrorResponse) => {
+                console.error(error.error.message)
+            }
+        })
     }
 
     onReturnPage() {
@@ -78,23 +98,12 @@ export class ManageContainersPageComponent implements OnInit {
             modal: true,
             closable: true,
         });
-        this.ref.onClose.subscribe((containerCreated: any) => {
-            console.log('Data from modal:', containerCreated);
-            if (containerCreated && containerCreated.containerCreated) {
-
-                this.containers_response.push({
-                    id: 'new-id-' + (this.containers_response.length + 1),
-                    location: {
-                        latitude: containerCreated.containerCreated.latitude,   
-                        longitude: containerCreated.containerCreated.longitude
-                    },
-                    capacity_liters: containerCreated.containerCreated.capacity_liters,
-                    status: 'low',
-                    last_fill_level: 0,
-                    last_updated: new Date().toISOString(),
-                    created_at: containerCreated.containerCreated.created_at.toISOString(),
-                    updated_at: new Date().toISOString()
-                });
+        this.ref.onClose.subscribe((containerCreated: ContainersResponse) => {
+            if (containerCreated != null) {
+                this.messageService.add({ severity: 'success', summary: 'Contenedor creado', detail: 'El contenedor fue creado correctamente' })
+                this.onGetContainers()
+            } else {
+                this.messageService.add({ severity: 'error', summary: 'Error al crear', detail: 'No se pudo crear el contenedor' })
             }
         });
     }
@@ -110,12 +119,31 @@ export class ManageContainersPageComponent implements OnInit {
             modal: true,
             closable: true,
         });
+        this.ref.onClose.subscribe((response: {edited: boolean, message: string}) => {
+            console.log(response);
+            
+            if (response.edited != true) {
+                this.messageService.add({ severity: 'error', summary: 'Error al editar el contenedor', detail: `${response.message}` })
+                this.onGetContainers()
+            } else {
+
+                this.messageService.add({ severity: 'success', summary: 'Contenedor editado', detail: `${response.message}` })
+            }
+        })
     }
        
     // Elimina el contenedor seleccionado.
     deleteContainer(id: string) {
-        this.containers_response = this.containers_response.filter(c => c.id !== id);
-        // this.containersService.deleteContainer(id);
+        this.containerService.deleteContainer(id)
+        .subscribe({
+            next: (res) => {                
+                this.messageService.add({ severity: 'success', summary: 'Contenedor eliminado', detail: 'Se elimino correctamente el contenedor' })
+                this.onGetContainers()
+            },
+            error: (error: HttpErrorResponse) => {                
+                this.messageService.add({ severity: 'error', summary: 'Error al eliminar', detail: 'No se pudo eliminar correctamente el contenedor' })
+            }
+        })
     }
     
 }

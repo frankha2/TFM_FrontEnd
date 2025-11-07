@@ -12,7 +12,7 @@
         </div>
         <div class="flex flex-row justify-content-between">
             <label for="capacity" class="flex justify-content-center align-items-center font-bold">Capacidad:</label>
-            <input pInputText type="number" min="0" step="1" id="capacity" class="w-8 font-medium" autocomplete="off" formControlName="longitude" required/>
+            <input pInputText type="number" min="0" step="1" id="capacity" class="w-8 font-medium" autocomplete="off" formControlName="capacity_liters" required/>
         </div>
         <div class="flex flex-row justify-content-between">
             <label for="stat" class="flex justify-content-center align-items-center font-bold">Estado:</label>
@@ -21,6 +21,8 @@
     </div>
     <div class="flex justify-content-between mt-5">
         <p-button label="Cancelar" severity="danger" (click)="onCloseModal()" />
-        <p-button type="submit" label="Editar" severity="info" [disabled]="form.valid" />
+        
+        <p-button type="submit" label="Editar" severity="info" [disabled]="form.valid" [loading]="isLoading" />
     </div>
 </form>
+<p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"/>

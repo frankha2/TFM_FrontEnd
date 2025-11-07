@@ -3,5 +3,5 @@ export const enviroment = {
     domain: 'localhost',
     system: 4,
 
-    apiGeneralUrl: 'https://18.209.27.71:8080/api'
+    apiGeneralUrl: 'http://35.168.14.125:443'
 }

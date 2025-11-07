@@ -95,6 +95,7 @@
                         <td> {{ container.last_updated | date }} </td>
                         <td>
                             <div class="flex justify-content-center align-items-center gap-2">
+                                <p-toast />
                                 <p-button
                                     (click)="onOpenEditModal(container.id)"
                                     severity="warn"

@@ -5,6 +5,8 @@ import { ContainersService } from "../../services/containers.service";
 import { ButtonModule } from "primeng/button";
 import { InputTextModule } from "primeng/inputtext";
 import { DynamicDialogRef } from "primeng/dynamicdialog";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ContainersResponse } from "../../interfaces/containers-response.interface";
 
 @Component({
     imports: [ ButtonModule, ReactiveFormsModule, InputTextModule ],
@@ -30,8 +32,6 @@ export class NewContainerComponent implements OnInit {
             latitude: [null, [Validators.required]],
             longitude: [null, [Validators.required]],
             capacity_liters: [null, [Validators.required]],
-            status: [1],
-            created_at: [new Date()]
         });
     }
 
@@ -41,19 +41,19 @@ export class NewContainerComponent implements OnInit {
 
     // Este método se ejecuta cuando se envía el formulario y envia la petición para guardar el nuevo contenedor.
     onSubmit() {
-        const { latitude, longitude, capacity_liters, status, created_at } = this.form?.value;
+        const { latitude, longitude, capacity_liters } = this.form?.value;
 
-        const data: ContainerCreated = {latitude: latitude, longitude: longitude, capacity_liters: capacity_liters, status: status, created_at: created_at };
+        const data: ContainerCreated = {latitude: latitude, longitude: longitude, capacity_liters: capacity_liters };
 
         this.containersService.createContainer(data)
-        // .subscribe(({
-        //     next: () => {
+        .subscribe(({
+            next: (resp: ContainersResponse) => {
                 
-        //     },
-        //     error: (error: HttpErrorResponse) => {
-        //         console.error(error.error.message);
-        //     }
-        // }))
-        this.ref.close({ containerCreated: data || null });
+                this.ref.close(resp);
+            },
+            error: (error: HttpErrorResponse) => {
+                this.ref.close(null);
+            }
+        }))
     }
 }
