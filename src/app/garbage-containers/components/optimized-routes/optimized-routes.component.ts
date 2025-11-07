@@ -36,7 +36,6 @@ export class OptimizedRoutesComponent implements OnInit {
     // Obtimiza la ruta de recolecta.
     onOptimizeRoute() {
         
-
         let data = {
             start_point: {
                 latitude: this.containersList()[0].location.latitude,
@@ -50,6 +49,8 @@ export class OptimizedRoutesComponent implements OnInit {
         this.containerService.getOptimizedRoute(data)
         .subscribe({
             next: (response: RouteOptimized[]) => {
+                console.log(response);
+                
                 this.routeOptimized.set(true);
                 this.containersList.set(response);
             }

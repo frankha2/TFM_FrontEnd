@@ -28,9 +28,9 @@ import { HttpErrorResponse } from "@angular/common/http";
 
 export class ContainersListMapPageComponent implements OnInit {
 
-    public containersList = signal<ContainersResponse[]>([])
     public filters: { level: number, status: string } = { level: 0, status: 'Todos' };
     public formFilters!: FormGroup;
+    public containersList = signal<ContainersResponse[]>([])
 
     private router = inject(Router);
     private fb = inject(FormBuilder);
@@ -58,7 +58,9 @@ export class ContainersListMapPageComponent implements OnInit {
     onGetContainers() {
         this.containerService.getAllContainers()
         .subscribe({
-            next: (response) => {
+            next: (response: ContainersResponse[]) => {
+                console.log(response);
+                
                 this.containersList.set(response)                
             },
             error: (error: HttpErrorResponse) => {

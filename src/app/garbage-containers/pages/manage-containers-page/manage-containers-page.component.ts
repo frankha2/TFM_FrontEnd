@@ -124,10 +124,10 @@ export class ManageContainersPageComponent implements OnInit {
             
             if (response.edited != true) {
                 this.messageService.add({ severity: 'error', summary: 'Error al editar el contenedor', detail: `${response.message}` })
-                this.onGetContainers()
             } else {
-
+                
                 this.messageService.add({ severity: 'success', summary: 'Contenedor editado', detail: `${response.message}` })
+                this.onGetContainers()
             }
         })
     }

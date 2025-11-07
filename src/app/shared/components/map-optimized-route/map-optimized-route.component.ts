@@ -48,6 +48,8 @@ export class MapOptimizedRouteComponent implements OnInit, AfterViewInit, OnChan
     if (changes['containersList'].previousValue && this.containersList.length > 0) {
       this.locations.set([]);
       this.onClearLastRoute();
+      console.log('asdasdasdasdsa');
+      
     }
   }
   
@@ -58,7 +60,7 @@ export class MapOptimizedRouteComponent implements OnInit, AfterViewInit, OnChan
   }
  
   private initMap(): void {
-    this.map = L.map('map').setView([40.416929035485396, -3.698773731337271], 13);
+    this.map = L.map('map').setView([4.70702698396433, -74.07311363725493], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

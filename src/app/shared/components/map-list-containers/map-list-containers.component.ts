@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, Input, OnInit } from "@angular/core";
+import { AfterViewInit, Component, inject, input, Input, OnInit, signal } from "@angular/core";
 import * as L from 'leaflet';
 import 'leaflet-routing-machine';
 import { ContainersResponse } from "../../../garbage-containers/interfaces/containers-response.interface";
@@ -20,9 +20,10 @@ import { ContainerModalSharedComponent } from "../container-modal-shared/contain
 
 export class MapListContainersComponent implements OnInit, AfterViewInit {
   @Input() containersList!: ContainersResponse[];
+  // public containersList = input<ContainersResponse[]>
 
   private map!: L.Map | undefined;
-  private locations: any[] = [];
+  private locations =  signal<any[]>([]);
   
   // @ts-ignore
   ref: DynamicDialogRef | undefined;
@@ -30,20 +31,25 @@ export class MapListContainersComponent implements OnInit, AfterViewInit {
   public dialogService = inject(DialogService);
 
   ngOnInit(): void {
-    this.locations = this.containersList?.map((resp) => {
+    this.locations.set(this.containersList?.map((resp) => {
+      console.log(resp);
+      
       return L.latLng(resp.location.latitude, resp.location.longitude);
-    });
+    }));
+    
     
   }
   
   ngAfterViewInit(): void {
+
     this.initMap();
     this.showRoutes();
     this.fitMap();
+    
   }
   // Inicializa el mapa. 
   private initMap(): void {
-    this.map = L.map('map').setView([40.416929035485396, -3.698773731337271], 13);
+    this.map = L.map('map').setView([4.70702698396433, -74.07311363725493], 13);
     // Crea una capa de mapa base usando OpenStreetMap.
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://1938.com.es">Web Inteligencia Artificial</a>'
@@ -87,10 +93,10 @@ export class MapListContainersComponent implements OnInit, AfterViewInit {
   }
   // Ajusta el mapa para que muestre todas las ubicaciones.
   fitMap() {
-    const latLngs = this.locations.map(loc => L.latLng(loc.lat, loc.lng));
-    const bounds = L.latLngBounds(latLngs);
+    // const latLngs = this.locations.map(loc => L.latLng(loc.lat, loc.lng));
+    // const bounds = L.latLngBounds(latLngs);
 
-    this.map?.fitBounds(bounds);
+    // this.map?.fitBounds(bounds);
   }
 
 }

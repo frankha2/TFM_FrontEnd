@@ -4,7 +4,6 @@ import { ContainerCreated } from "../interfaces/container-created.interface";
 import { HttpClient } from "@angular/common/http";
 import { CreateRoute, RouteOptimized } from "../interfaces/response-routes.interface";
 
-const API_URL = '/api/v1/containers';
 @Injectable({
     providedIn: 'root',
 })
