@@ -1,9 +1,9 @@
 ### TFM Contenedores de basura para ciudades inteligentes
 
 
-Esta aplicación permite tener un mayor control de las ubicaciones de los contenedores y el nivel de llenado de cada uno.
-Ademas permite visualizar una ruta, eficiente, de recogida de los desperdicios, en dicha ruta solo se muestran los contenedores mas llenos.
-Con esto se busca eficientar las rutas de recogida de los desperdicios para obtener tiempos mas cortos de recogida y un menor uso de combustibles.
+Esta aplicación permite tener un mayor control de las ubicaciones de los contenedores y el nivel de llenado de cada uno. <br>
+Ademas permite visualizar una ruta, eficiente, de recogida de los desperdicios, en dicha ruta solo se muestran los contenedores mas llenos. <br>
+Con esto se busca eficientar las rutas de recogida de los desperdicios para obtener tiempos mas cortos de recogida y un menor uso de combustibles. <br>
 Esto contribuye a tener un ambiente mas limpio y contribuye a un sistema de recolecta de residuos mas sostenible y amigable con la naturaleza.
 
 ## Requisitos 📋
