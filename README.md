@@ -17,7 +17,7 @@ Node.js [NodeJS](https://nodejs.org/es/blog/release/v22.11.0) version 22.11.0
 Primero descarga e instala la versión de NodeJs necesaria
 
 ```bash
-[git clone "url"](https://nodejs.org/es/blog/release/v22.11.0)
+https://nodejs.org/es/blog/release/v22.11.0
 ```
 
 Luego clona el repositorio
