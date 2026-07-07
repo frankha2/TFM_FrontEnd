@@ -1,61 +1,83 @@
-# TFMFrontEnd
+### TFMFrontEnd
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
 
-Node.js v22.11.0
+Es una aplicación responsiva, para enviar a todos los invitados de la boda. 
+La aplicación muestra diferentes apartados importantes como la ubicación donde será la ceremonia, el tipo de vestuario que se solicita, como se desean obtener los regalos, entre otros apartados importantes.
 
-## Development server
+## Requisitos 📋
 
-To start a local development server, run:
+Proyecto hecho con [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+Node.js [NodeJS](https://nodejs.org/es/blog/release/v22.11.0) version 22.11.0
+
+## Instalación 🔧
+
+Primero descarga el repositorio
 
 ```bash
-ng serve
+git clone "url"
 ```
+Instala el NPM en la carpeta del proyecto
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+```bash
+npm install
+```
+Ahora inicializa un servidor de desarrollo local, ejecutando
 
-## Code scaffolding
+```bash
+ng serve -o
+```
+Al ejecutar el servidor, sino se abre automanticamente el navegador, abrelo y accede a http://localhost:4200/ 
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Herramientas utilizadas 🛠️
+
+_Menciona las herramientas que utilizaste para crear tu proyecto_
+
+* [Angular](https://angular.dev/tools/cli/setup-local) - El framework web usado
+* [JavaScript](https://developer.mozilla.org/es/docs/Web/JavaScript) - Lenguaje
+* [HTML5](https://developer.mozilla.org/es/docs/Glossary/HTML5) - Lenguaje de marcado de hipertexto
+* [CSS3](https://developer.mozilla.org/es/docs/Web/CSS) - Hojas de Estilo en Cascada
+* [Node](https://nodejs.org/es/blog/release/v22.11.0) - Entorno de ejecución de código abierto que permite ejecutar fuera del navegador web código JavaScript
+
+## Andamiaje de código
+
+Angular CLI incluye potentes herramientas de andamiaje de código. Para generar un nuevo componente, ejecute:
 
 ```bash
 ng generate component component-name
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Para obtener una lista completa de los esquemas disponibles (como componentes, directivas o tuberías), ejecute:
 
 ```bash
 ng generate --help
 ```
 
-## Building
+## Building 📦
 
-To build the project run:
+Para compilar el proyecto, ejecute:
 
 ```bash
 ng build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Esto compilará tu proyecto y almacenará los artefactos de compilación en el directorio dist/. Por defecto, la compilación de producción optimiza tu aplicación para mejorar el rendimiento y la velocidad.
 
-## Running unit tests
+## Ejecución de pruebas unitarias ⚙️
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Para ejecutar pruebas unitarias con el ejecutor de pruebas [Karma](https://karma-runner.github.io), utilice el siguiente comando.
 
 ```bash
 ng test
 ```
 
-## Running end-to-end tests
+## Ejecución de pruebas de extremo a extremo 🔩
 
-For end-to-end (e2e) testing, run:
+Para realizar pruebas de extremo a extremo (e2e), ejecute:
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Angular CLI no incluye un marco de pruebas de extremo a extremo por defecto. Puedes elegir uno que se adapte a tus necesidades.
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+⌨️ con ❤️ por [frankha2](https://github.com/frankha2) 😊
