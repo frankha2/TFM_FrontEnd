@@ -1,17 +1,26 @@
-### TFMFrontEnd
+### TFM Contenedores de basura para ciudades inteligentes
 
 
-Es una aplicación responsiva, para enviar a todos los invitados de la boda. 
-La aplicación muestra diferentes apartados importantes como la ubicación donde será la ceremonia, el tipo de vestuario que se solicita, como se desean obtener los regalos, entre otros apartados importantes.
+Esta aplicación permite tener un mayor control de las ubicaciones de los contenedores y el nivel de llenado de cada uno.
+Ademas permite visualizar una ruta, eficiente, de recogida de los desperdicios, en dicha ruta solo se muestran los contenedores mas llenos.
+Con esto se busca eficientar las rutas de recogida de los desperdicios para obtener tiempos mas cortos de recogida y un menor uso de combustibles.
+Esto contribuye a tener un ambiente mas limpio y contribuye a un sistema de recolecta de residuos mas sostenible y amigable con la naturaleza.
 
 ## Requisitos 📋
 
 Proyecto hecho con [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+
 Node.js [NodeJS](https://nodejs.org/es/blog/release/v22.11.0) version 22.11.0
 
 ## Instalación 🔧
 
-Primero descarga el repositorio
+Primero descarga e instala la versión de NodeJs necesaria
+
+```bash
+[git clone "url"](https://nodejs.org/es/blog/release/v22.11.0)
+```
+
+Luego clona el repositorio
 
 ```bash
 git clone "url"
